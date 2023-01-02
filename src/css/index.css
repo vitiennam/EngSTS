@@ -1,0 +1,57 @@
+/* .nav a, .nav li input {
+    display: none !important;
+    display: inline-block;
+    padding: 0px !important;
+    line-height: 0px !important;
+    color: ;
+    font-size: 11pt;
+    cursor: pointer;
+} */
+
+.nav-link {
+    display: block !important;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x) !important;
+    font-size: var(--bs-nav-link-font-size) !important;
+    font-weight: var(--bs-nav-link-font-weight) !important;
+    color: var(--bs-nav-link-color) !important;
+    text-decoration: none !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out !important;
+}
+/* Style the tab */
+.tab {
+    display: none;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #ccc;
+  }
+  
+  /* .iframe {
+      width: 100% !important;
+      height: 1000px;
+  } */
+/* #gb {
+    position: relative !important;
+
+} */
