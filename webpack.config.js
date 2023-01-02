@@ -54,13 +54,13 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    // filename: '[name].[contenthash].js',
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
+    // filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     clean : true,
     publicPath: "/",
   },
-  // optimization: {
-  //   runtimeChunk: "single"
-  // }
+  optimization: {
+    runtimeChunk: "single"
+  }
 };
