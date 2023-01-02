@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flash Card</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- <link rel="stylesheet" href="css/index.css"> -->
+        <link rel="icon" type="image/x-icon" href="/image_logo/logo_git.PNG">
+
+    </head>
+    <body>
+        <div>
+            <ul class="nav nav-tab">
+                <li class="nav-item col">
+                    <a class="nav-link text-center" href="/">Search</a>
+                </li>
+                <li class="nav-item col">
+                    <a class="nav-link text-center" href="flash_card.html">Flash Card</a>
+                </li>
+                <li class="nav-item col">
+                    <a class="nav-link text-center" href="history.html">History</a>
+                </li>
+            </ul>
+            
+        </div>
+        <div class="container">
+            <div>
+                <p>Just tab the word</p>
+                <button id="buttonFC"></button>
+            </div>
+            <div class="tab" id="tabSeach">
+                <button class="tablinks " id="tablinksO" >Oxford</button>
+                <button class="tablinks " id="tablinksC" >Cambridge</button>
+
+                <!-- <button class="tablinks" onclick="openSearchContent(event, 'SearchContentGG')">GG</button> -->
+            </div>
+              <div>
+                  
+                <div id="SearchContentO" class="tabcontent">
+                
+                </div>
+                <div id="divIframeSeach">
+                    <iframe class="iframe" id="SearchContentIframe"></iframe>
+                </div>
+                
+                
+              </div>
+        </div>
+        
+        <!-- <script src="jsSource/flashCard.js"></script> -->
+    </body>
+</html>
