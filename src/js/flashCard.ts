@@ -9,6 +9,7 @@ $(function(){
       document.getElementById('buttonFC').innerHTML = data
       searchWordRandom = data
   })
+
   function setCookie(cname: string, cvalue: string | string[], exdays: number) {
       const d = new Date();
       d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));

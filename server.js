@@ -23,7 +23,10 @@ app.use(
 app.get('/engDataSearch', (req, res)=>{
     res.end(JSON.stringify(listWordEng))
 } )
+app.get('/randomWord', (req,res)=>{
+  res.end(listWordEng[Math.floor(Math.random() * listWordEng.length)])
 
+})
 app.get(/queryWordO/, (req, res)=>{
     
         console.log(req.url)
