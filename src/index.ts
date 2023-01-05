@@ -1,6 +1,25 @@
 import './css/index.css'
 
 $(function(){
+  var email = getCookie('email')
+  var username = getCookie('username')
+  var token = getCookie('token')
+
+  console.log('username: ', username)
+  if(username){
+    document.getElementById('loginA').innerHTML = 'Hi ' + username
+    document.getElementById('loginA').setAttribute('href', '#')
+    document.getElementById('buttonLogout').onclick = logOut
+  } else {
+    document.getElementById('divButtonLogout').style.display = 'none'
+    
+  }
+  function logOut(evt: any){
+    setCookie('username',"", 15)
+    setCookie('email',"", 15)
+    setCookie('token',"", 15)
+    location.reload()
+  }
   function openSearchContent(evt: any) {
     var i, tablinks, searchTabName;
     
@@ -111,7 +130,7 @@ $(function(){
           },
       select: function( event: any, ui:any ) {
         userHistory.push(ui.item.value)
-        localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+        // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
           // console.log(ui)
           document.getElementById('tabSeach').style.display = 'block'
           // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
@@ -154,6 +173,9 @@ $(function(){
       }
   }
   );
+  window.onbeforeunload = function () {
+    localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+};
 
 });
 

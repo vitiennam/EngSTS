@@ -2,16 +2,19 @@
 <html>
     <head>
         <link rel="stylesheet" href="css/login.css">
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+  crossorigin="anonymous"></script>
     </head>
     <body>
         
-        <form action="/login" method="post">
+        <form action="/login" id="formLogin" method="post" target="_self">
             <h1>Log In</h1>
             <input type="email" name="useremail" id="" placeholder="Email Address" required>
             <input type="password" name="userpassword" id="" placeholder="Password" required>
             <button type="submit">Log In</button>
         </form>
-        <form action="/signup" method="post">
+        <form action="/signup" id="signUp" method="post" target="_self">
             <h1>Sign Up</h1>
             <div>
                 <label for="username"><b>Name:</b></label>

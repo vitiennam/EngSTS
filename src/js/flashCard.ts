@@ -10,6 +10,18 @@ $(function(){
     userHistory = []
   }
   console.log(userHistory)
+  var email = getCookie('email')
+  var username = getCookie('username')
+  var token = getCookie('token')
+
+  console.log('username: ', username)
+  if(username){
+    document.getElementById('loginA').innerHTML = 'Hi ' + username
+    document.getElementById('loginA').setAttribute('href', '#')
+  }
+
+
+
   $.get("randomWord", function(data, status){
       console.log(data)
       document.getElementById('buttonFC').innerHTML = data
@@ -90,7 +102,7 @@ $(function(){
   
       document.getElementById('divIframeSeach').style.display = 'none'
       userHistory.push(searchWordRandom)
-      localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+      // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
       $.get("queryWordO="+searchWordRandom, function(datahtml, statushtml){
           // alert("\nStatus: " + statushtml);
           // data.getElementById('ad_leftslot_container').remove
@@ -103,5 +115,8 @@ $(function(){
           // document.getElementById('ad_leftslot_container').remove
         });
   });
+  window.onbeforeunload = function () {
+    localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+};
 })
 

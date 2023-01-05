@@ -8,6 +8,7 @@ const config = require('./webpack.config')
 const compiler = webpack(config)
 const session = require('express-session');
 const mysql = require('mysql2')
+const randomToken = require('random-token')
 
 //-----------
 var filePathData = "src/data/EWords2.json"
@@ -47,9 +48,9 @@ app.get('/engDataSearch', (req, res)=>{
 } )
 app.post('/login', function(req, res){
   console.log(req.body)
-  let email = req.body.useremail;
-	let password = req.body.userpassword;
-
+  let email = req.body.useremail
+	let password = req.body.userpassword
+  const userToken = randomToken(16)
 
   var sql = 'SELECT * FROM user WHERE email = '+email+' AND password = '+password
   // var sql = 'SELECT * FROM user WHERE email = ? AND password = ?'
@@ -57,24 +58,45 @@ app.post('/login', function(req, res){
   if (email && password) {
     // con.query(sql, function(err, results, fields){
     con.query('SELECT * FROM user WHERE email = ? AND password = ?', [email,password], function(err, results, fields){		
-			if (err) throw err;
-			
+			if (err) throw err
+			console.log(results)
 			if (results.length > 0) {
+				con.query('UPDATE user SET token = ? WHERE email = ?;', [userToken, email], function(err, results1, fields){
+          if (err) throw err
+          // console.log(results1)
+          console.log(results)
+          console.log(results[0].username)
+          req.session.loggedin = true
+          req.session.email = results.email
+          req.session.username = results[0].username
+  
+          // res.json({email:email, token:userToken})
+          var exdays = 15
+          let options = {
+            maxAge: 24 * 60 * 60 * 1000 * exdays, // would expire after 15 minutes
+            // httpOnly: true, // The cookie only accessible by the web server
+            // signed: true // Indicates if the cookie should be signed
+        }
+          res.cookie('email', email, options)
+          res.cookie('token', userToken, options)
+          res.cookie('username', results[0].username, options)
+          // res.write(JSON.stringify({email:email, token:userToken}))
+          res.redirect('/')
+          res.end()
+        })
 				
-				req.session.loggedin = true;
-				req.session.email = email;
 				
-				res.redirect('/')
 			} else {
 				res.send('Incorrect Email and/or Password!')
+        res.end()
 			}			
-			res.end()
+			
     })
   } else {
     res.send('Incorrect Email and/or Password!')
     res.end()
   }
-
+  // res.end()
 })
 
 app.post('/signup', function(req, res){
@@ -82,10 +104,10 @@ app.post('/signup', function(req, res){
   let email = req.body.useremail;
 	let password = req.body.userpassword;
   let username = req.body.username;
-
+  const userToken = randomToken(16)
   // INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
   // var sql = 'INSERT INTO user (username, password, email) VALUES ('+username+','+password+','+email+');'
-  var sql = 'INSERT INTO user (username, password, email) VALUES (?,?,?);'
+  var sql = 'INSERT INTO user (username, password, email, token) VALUES (?,?,?,?);'
   console.log('sql: ', sql)
   if (email && password && username) {
     con.query('SELECT * FROM user WHERE email = ?', [email], function(err, results, fields){		
@@ -94,10 +116,21 @@ app.post('/signup', function(req, res){
         throw err
       }
       if (results.length === 0) {
-        con.query(sql, [username, password, email], function(err, results, fields){
+        con.query(sql, [username, password, email, userToken], function(err, results, fields){
             
           if (err) throw err;
-          console.log("1 record inserted");
+          console.log("1 record inserted")
+          // res.write(userToken)
+          // res.json({username:username, token:userToken})
+          var exdays = 15
+          let options = {
+            maxAge: 24 * 60 * 60 * 1000 * exdays, // would expire after 15 minutes
+            // httpOnly: true, // The cookie only accessible by the web server
+            // signed: true // Indicates if the cookie should be signed
+        }
+          res.cookie('email', email, options)
+          res.cookie('token', userToken, options)
+          res.cookie('username', username, options)
           res.redirect('/')
           res.end()
         })

@@ -8,7 +8,15 @@ $(function(){
     userHistory = []
   }
 
+  var email = getCookie('email')
+  var username = getCookie('username')
+  var token = getCookie('token')
 
+  console.log('username: ', username)
+  if(username){
+    document.getElementById('loginA').innerHTML = 'Hi ' + username
+    document.getElementById('loginA').setAttribute('href', '#')
+  }
 
   function setCookie(cname: string, cvalue: string | string[], exdays: number) {
     const d = new Date();
