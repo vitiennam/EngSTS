@@ -1,9 +1,15 @@
 import '../css/index.css'
 $(function(){
   var searchWord
-  var cookieThis = getCookie('thisUser')
-  console.log("cookie log " + cookieThis)
-  var userHistory = cookieThis.split(',')
+  var userHistory: any[]
+  if(localStorage.userHistoryWord) {
+    userHistory = JSON.parse(localStorage.userHistoryWord) 
+  } else {
+    userHistory = []
+  }
+
+
+
   function setCookie(cname: string, cvalue: string | string[], exdays: number) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -39,13 +45,15 @@ function openSearchContent(evt: any) {
           
           // document.getElementById('SearchContentIframe').style.height = '0px'
           // document.getElementById('SearchContentIframe').style.width = '0px'
-          document.getElementById('SearchContentO').style.display = 'block'
+          document.getElementById('divIframeSeachO').style.display = 'block'
           document.getElementById('divIframeSeach').style.display = 'none'
+          document.getElementById('SearchContentO').style.width = '100%'
+          document.getElementById('SearchContentO').style.height = '1000px'
           console.log("SearchContentO display " + document.getElementById('SearchContentO').style.display)
           break
       case 'Cambridge':
           // document.getElementById('SearchContentIframe').src = linkCam
-          document.getElementById('SearchContentO').style.display = 'none'
+          document.getElementById('divIframeSeachO').style.display = 'none'
           document.getElementById('divIframeSeach').style.display = 'block'
           document.getElementById('SearchContentIframe').style.width = '100%'
           document.getElementById('SearchContentIframe').style.height = '1000px'
@@ -92,8 +100,11 @@ $(".buttonHisClass").click(function (e) {
         // alert("\nStatus: " + statushtml);
         // data.getElementById('ad_leftslot_container').remove
         if(statushtml == 'success'){
-            document.getElementById('SearchContentO').innerHTML = datahtml
-            document.getElementById('ad_leftslot_container').style.display = 'none'
+            // document.getElementById('SearchContentO').innerHTML = datahtml
+            document.getElementById('SearchContentO').style.width = '100%'
+              document.getElementById('SearchContentO').style.height = '1000px'
+              document.getElementById('SearchContentO').setAttribute('srcdoc', datahtml)
+            // document.getElementById('ad_leftslot_container').style.display = 'none'
             var btnHis = document.getElementsByClassName("buttonHisClass");
             for (var i = 0; i < btnHis.length; i++) {
                 btnHis[i].className = btnHis[i].className.replace(" disabled", "");

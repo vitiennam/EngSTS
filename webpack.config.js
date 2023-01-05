@@ -2,11 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  // mode: "development",
+  mode: "development",
   entry: {
     index: "./src/index.ts",
     history: "./src/js/history.ts",
-    flashCard: "./src/js/flashCard.ts"
+    flashCard: "./src/js/flashCard.ts",
+    login:"./src/js/login.ts"
     // history: {
     //   import: './src/js/history.ts',
     //   dependOn: 'shared',
@@ -35,6 +36,12 @@ module.exports = {
       template: './src/flash_card.html',
       chunks: ['flashCard']
     }),
+    new HtmlWebpackPlugin({
+      title: 'login',
+      filename: 'login.html',
+      template: './src/login.html',
+      chunks: ['login']
+    }),
   ],
   module: {
     rules: [
@@ -60,7 +67,7 @@ module.exports = {
     clean : true,
     publicPath: "/",
   },
-  optimization: {
-    runtimeChunk: "single"
-  }
+  // optimization: {
+  //   runtimeChunk: "single"
+  // }
 };

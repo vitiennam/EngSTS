@@ -11,13 +11,15 @@ $(function(){
             
             // document.getElementById('SearchContentIframe').style.height = '0px'
             // document.getElementById('SearchContentIframe').style.width = '0px'
-            document.getElementById('SearchContentO').style.display = 'block'
+            document.getElementById('divIframeSeachO').style.display = 'block'
             document.getElementById('divIframeSeach').style.display = 'none'
+            document.getElementById('SearchContentO').style.width = '100%'
+            document.getElementById('SearchContentO').style.height = '1000px'
             console.log("SearchContentO display " + document.getElementById('SearchContentO').style.display)
             break
         case 'Cambridge':
             // document.getElementById('SearchContentIframe').src = linkCam
-            document.getElementById('SearchContentO').style.display = 'none'
+            document.getElementById('divIframeSeachO').style.display = 'none'
             document.getElementById('divIframeSeach').style.display = 'block'
             document.getElementById('SearchContentIframe').style.width = '100%'
             document.getElementById('SearchContentIframe').style.height = '1000px'
@@ -69,10 +71,16 @@ $(function(){
       }
     }
   }
-  var cookieThis = getCookie('thisUser')
-  console.log("cookie log " + cookieThis)
-  var userHistory = cookieThis.split(',')
-  
+  var userHistory: any[]
+  if(localStorage.userHistoryWord) {
+    userHistory = JSON.parse(localStorage.userHistoryWord) 
+  } else {
+    userHistory = []
+  }
+  // var cookieThis = getCookie('thisUser')
+  // console.log("cookie log " + cookieThis)
+  // var userHistory = cookieThis.split(',')
+  console.log(userHistory)
   
   function setCookie(cname: string, cvalue: string | string[], exdays: number) {
     const d = new Date();
@@ -103,7 +111,7 @@ $(function(){
           },
       select: function( event: any, ui:any ) {
         userHistory.push(ui.item.value)
-        setCookie('thisUser',userHistory,30)
+        localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
           // console.log(ui)
           document.getElementById('tabSeach').style.display = 'block'
           // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
@@ -119,7 +127,11 @@ $(function(){
           $.get("queryWordO="+ui.item.value, function(data, status){
               // alert("\nStatus: " + status);
               // data.getElementById('ad_leftslot_container').remove
-              document.getElementById('SearchContentO').innerHTML = data
+              // document.getElementById('SearchContentO').innerHTML = data
+              document.getElementById('SearchContentO').style.width = '100%'
+              document.getElementById('SearchContentO').style.height = '1000px'
+              document.getElementById('SearchContentO').setAttribute('srcdoc', data)
+
               // document.getElementById('ad_leftslot_container').remove
             });
           //   $.get("queryWordC="+ui.item.value, function(data, status){
