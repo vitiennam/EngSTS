@@ -9,17 +9,14 @@ const compiler = webpack(config)
 const session = require('express-session');
 const mysql = require('mysql2')
 const randomToken = require('random-token')
-
+const configMySql = require('./configMySql.js')
+// import  configMySql  from './configMySql'
+// import { configMySql } from './configMySql.js'
 //-----------
 var filePathData = "src/data/EWords2.json"
 let rawData = fs.readFileSync(filePathData)
 var listWordEng = JSON.parse(rawData)
-const con = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '*',
-  database : 'engsdb'
-})
+const con = mysql.createConnection(configMySql)
 //-----------
 // con.connect();
 con.connect(function(err) {

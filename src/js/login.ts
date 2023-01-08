@@ -1,4 +1,6 @@
+import '../css/login.css'
 $(function(){
+
     // $('#form').submit(function(){
         
     // });
