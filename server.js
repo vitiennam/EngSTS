@@ -178,7 +178,7 @@ app.get(/queryWordO/, (req, res)=>{
     
 } )
 
-app.listen(443, function () {
-    console.log('Example app listening on port 443!\n');
+app.listen(80, function () {
+    console.log('Example app listening on port 80!\n');
   })
 // con.end();
