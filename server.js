@@ -10,6 +10,7 @@ const session = require('express-session');
 const mysql = require('mysql2')
 const randomToken = require('random-token')
 const configMySql = require('./configMySql.js')
+const port = require('./configPort')
 // import  configMySql  from './configMySql'
 // import { configMySql } from './configMySql.js'
 //-----------
@@ -178,7 +179,7 @@ app.get(/queryWordO/, (req, res)=>{
     
 } )
 
-app.listen(80, function () {
-    console.log('Example app listening on port 80!\n');
+app.listen(port, function () {
+    console.log('Example app listening on port '+port+' !\n');
   })
 // con.end();
