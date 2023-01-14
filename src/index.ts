@@ -128,7 +128,7 @@ $(function(){
                   return matcher.test( item );
               }) );
           },
-      select: function( event: any, ui:any ) {
+      select: function( event: any, ui: any ) {
         userHistory.push(ui.item.value)
         // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
           // console.log(ui)

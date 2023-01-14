@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.container, body, html {
+    height: 100%;
+    max-width: 1200px;
+}
+.container {
+    max-width: 1200px;
+}
+.topsearch {
+    height: 30%;
+    background-color: white;
+}
+.topNavBar {
+    width: 100%;
+    position: fixed;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+.logo, .navFeature, .userAccount {
+    display: inline-flex;
+    
+}
+li {
+    display: inline;
+    padding: 0em 0.5em;
+}
+a, h1, li {
+    font-family: Poppins;
+}
+a, li {
+    text-decoration: none;
+    color:rgb(3, 110, 233);
+    font-size: large;
+}
+
+.searchDiv {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 20%;
+    justify-content: center;
+    
+}
+.searchBar {
+    display:flex;
+    width: 50%;
+    height: 45px;
+    border-style: solid;
+    border-radius: 50px;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 3px 5px 10px rgb(210, 210, 210) ;
+}
+input.searchInput {
+    width: 90%;
+    border-style: none;
+    border-color: transparent;
+    background-color: transparent;
+    font-size: large;
+}
+input.searchInput:focus {
+    outline: none;
+}
+.searchContent {
+    display: none;
+    height: 100%;
+    
+}
+.choiceDicBtn button {
+    background-color: lightblue;
+    border: none;
+    padding: 10px 15px;
+    border-color: cadetblue;
+    font-size: large;
+    cursor: pointer;
+    
+}
+
+
+.active {
+    background-color:rgb(38, 211, 211);
+    color: rgb(254, 245, 245);
+}
+
+
+iframe, #divIframeSeach, #divIframeSeachO {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+}

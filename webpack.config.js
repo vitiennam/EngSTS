@@ -4,15 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: "development",
   entry: {
-    index: "./src/index.ts",
+    // index: "./src/index.ts",
+    index: "./src/js/index2.ts",
     history: "./src/js/history.ts",
     flashCard: "./src/js/flashCard.ts",
-    login:"./src/js/login.ts"
-    // history: {
-    //   import: './src/js/history.ts',
-    //   dependOn: 'shared',
-    // },
-    // shared: './src/css/index.css',
+    login:"./src/js/login.ts",
+    common:"./src/js/common.ts"
+
   },
   // devtool: 'inline-soure-map',
   devServer: {
@@ -21,8 +19,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'English Search Web',
-      template: './src/index.html',
-      chunks: ['index']
+      // template: './src/index.html',
+      template: './src/index2.html',
+      chunks: ['index', 'common']
     }),
     new HtmlWebpackPlugin({
       title: 'History',
