@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-.container, body, html {
+html {
+    height: 100%;
+    width: 100%;
+}
+.container, body {
     height: 100%;
     max-width: 1200px;
+    margin: auto;
 }
 .container {
     max-width: 1200px;
@@ -12,7 +17,6 @@
 }
 .topNavBar {
     width: 100%;
-    position: fixed;
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
@@ -37,7 +41,7 @@ a, li {
 
 .searchDiv {
     display: flex;
-    position: fixed;
+    position: relative;
     width: 100%;
     top: 20%;
     justify-content: center;

@@ -1,57 +1,96 @@
-/* .nav a, .nav li input {
-    display: none !important;
-    display: inline-block;
-    padding: 0px !important;
-    line-height: 0px !important;
-    color: ;
-    font-size: 11pt;
-    cursor: pointer;
-} */
-
-.nav-link {
-    display: block !important;
-    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x) !important;
-    font-size: var(--bs-nav-link-font-size) !important;
-    font-weight: var(--bs-nav-link-font-weight) !important;
-    color: var(--bs-nav-link-color) !important;
-    text-decoration: none !important;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out !important;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+html {
+    height: 100%;
+    width: 100%;
 }
-/* Style the tab */
-.tab {
-    display: none;
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-  }
-  
-  /* Style the buttons inside the tab */
-  .tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-  }
-  
-  /* Change background color of buttons on hover */
-  .tab button:hover {
-    background-color: #ddd;
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
-    background-color: #ccc;
-  }
-  
-  /* .iframe {
-      width: 100% !important;
-      height: 1000px;
-  } */
-/* #gb {
-    position: relative !important;
+.container, body {
+    height: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+.container {
+    max-width: 1200px;
+}
+.topsearch {
+    height: 30%;
+    background-color: white;
+}
+.topNavBar {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+.logo, .navFeature, .userAccount {
+    display: inline-flex;
+    
+}
+li {
+    display: inline;
+    padding: 0em 0.5em;
+}
+a, h1, li {
+    font-family: Poppins;
+}
+a, li {
+    text-decoration: none;
+    color:rgb(3, 110, 233);
+    font-size: large;
+}
 
-} */
+.searchDiv {
+    display: flex;
+    position: relative;
+    width: 100%;
+    top: 20%;
+    justify-content: center;
+    
+}
+.searchBar {
+    display:flex;
+    width: 50%;
+    height: 45px;
+    border-style: solid;
+    border-radius: 50px;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 3px 5px 10px rgb(210, 210, 210) ;
+}
+input.searchInput {
+    width: 90%;
+    border-style: none;
+    border-color: transparent;
+    background-color: transparent;
+    font-size: large;
+}
+input.searchInput:focus {
+    outline: none;
+}
+.searchContent {
+    display: none;
+    height: 100%;
+    
+}
+.choiceDicBtn button {
+    background-color: lightblue;
+    border: none;
+    padding: 10px 15px;
+    border-color: cadetblue;
+    font-size: large;
+    cursor: pointer;
+    
+}
+
+
+.active {
+    background-color:rgb(38, 211, 211);
+    color: rgb(254, 245, 245);
+}
+
+
+iframe, #divIframeSeach, #divIframeSeachO {
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+}

@@ -2,14 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: "development",
+  // mode: "development",
   entry: {
-    // index: "./src/index.ts",
-    index: "./src/js/index2.ts",
+    index: "./src/js/index.ts",
     history: "./src/js/history.ts",
     flashCard: "./src/js/flashCard.ts",
     login:"./src/js/login.ts",
-    common:"./src/js/common.ts"
 
   },
   // devtool: 'inline-soure-map',
@@ -19,9 +17,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'English Search Web',
-      // template: './src/index.html',
-      template: './src/index2.html',
-      chunks: ['index', 'common']
+      template: './src/index.html',
+      chunks: ['index']
     }),
     new HtmlWebpackPlugin({
       title: 'History',
@@ -60,13 +57,13 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].[contenthash].bundle.js',
     // filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     clean : true,
     publicPath: "/",
   },
-  // optimization: {
-  //   runtimeChunk: "single"
-  // }
+  optimization: {
+    runtimeChunk: "single"
+  }
 };
