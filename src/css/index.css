@@ -17,6 +17,9 @@ html {
 li {
     list-style-type: none;
 }
+a, h1, li {
+    font-family: Poppins;
+}
 .dropMenuContent {
     display: none;
     width: 30%;
@@ -40,8 +43,9 @@ li {
         border: none;
     }
     .dropClick div {
-        width: 30px;
+        width: 28px;
         height: 4px;
+        border-radius: 2px;
         background-color: rgb(3, 110, 233);
         margin: 3px;
     }
@@ -56,6 +60,9 @@ li {
     .dropMenuContent li {
         display: block;
     }
+    a {
+        display: block;
+    }
 }
 
 @media only screen and (min-width: 701px) {
@@ -68,6 +75,10 @@ li {
         background-color: transparent;
         border: none;
         display: none;
+    }
+    .topNavBar li {
+        display: inline;
+        padding: 0em 0.5em;
     }
 }
 .topNavBar {
@@ -84,22 +95,18 @@ li {
 }
 
 .topsearch {
-    height: 30%;
+    height: 35%;
     background-color: white;
 }
 
-.topNavBar li {
-    display: inline;
-    padding: 0em 0.5em;
-}
-a, h1, li {
-    font-family: Poppins;
-}
+
+
 a, li {
     text-decoration: none;
     color:rgb(3, 110, 233);
     font-size: large;
 }
+
 
 .searchDiv {
     display: flex;

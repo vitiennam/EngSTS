@@ -4,6 +4,8 @@ import "../css/index.css"
 
 var engDataSearch: ArrayLike<String>
 var userHistory: any[]
+var notClick = ['dropMenuContent', 'dropMenu', 'dropBtn', 'dropClick', 't1', 't2', 't3'];
+
 if(localStorage.userHistoryWord) {
   userHistory = JSON.parse(localStorage.userHistoryWord) 
 } else {
@@ -74,6 +76,7 @@ function dropBtn(evt: any) {
   }
 }
 
+
 // ------------------------
 $(function(){
 
@@ -92,7 +95,17 @@ $(function(){
     document.getElementById("tablinksO").onclick = openSearchContent
     document.getElementById("tablinksC").onclick = openSearchContent
     document.getElementById("dropBtn").onclick = dropBtn
+    document.onclick = function(evt: any) {
+      if(document.getElementById("dropMenuContent").style.display == "block")
+      {
+        if( notClick.includes(evt.target.id) == false) {
+          console.log(evt.target.id)
 
+          document.getElementById("dropMenuContent").style.display = "none"
+        }
+      }
+      
+    }
     $( "#autocomplete" ).autocomplete({
         source: function( request: any, response:any ) {
                 var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
