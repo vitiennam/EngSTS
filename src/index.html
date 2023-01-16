@@ -6,9 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
         <!-- <link rel="stylesheet" href="/src/css/index2.css"> -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> -->
         <script src="//code.jquery.com/jquery-1.12.4.js"></script>
         <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <!-- <link rel="stylesheet" href="css/index.css"> -->
     </head>
     <body>
         <div class="container">
@@ -31,13 +32,33 @@
                     
                     
                     <div class="userAccount">
-                        <uv>
-                            <li class="userNameLi">userName</li>
-                            <li>Pic</li>
-                        </uv>
+                        <ul>
+                            <li class="userNameLi"><a href="login.html">Log In</a></li>
+                            <li class="PicLi" id="PicLi">pic</li>
+                        </ul>
+                        <div class="dropMenu">
+                            <button id="dropBtn">
+                                <div class="dropClick">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </button>
+                            
+                            
+                        </div>
+
+
+
                     </div>
                 </div>
-
+                <div class="dropMenuContent" id="dropMenuContent">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="flash_card.html">Flash Card</a></li>
+                        <li><a href="history.html">History</a></li>
+                    </ul>
+                </div>
                 <div class="searchDiv">
                     <div class="searchBar">
                         <input type="search" class="searchInput" id="autocomplete">
@@ -69,8 +90,7 @@
 
 
 
-
-        <!-- <script src="js/index2.ts"></script> -->
+        <!-- <script type="scripttype" src="js/index.ts"></script> -->
     </body>
 </html>
 

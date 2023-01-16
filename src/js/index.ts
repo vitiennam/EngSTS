@@ -1,6 +1,6 @@
 
 import * as commonFunc from "./common"
-import "../css/index2.css"
+import "../css/index.css"
 
 var engDataSearch: ArrayLike<String>
 var userHistory: any[]
@@ -54,10 +54,6 @@ function openSearchContent(evt: any) {
         
 
     }
-// tabcontent = document.getElementsByClassName("iframe");
-// for (i = 0; i < tabcontent.length; i++) {
-//     tabcontent.style.display = "none";
-// }
 
     tablinks = document.getElementsByClassName("btnContent");
     for (i = 0; i < tablinks.length; i++) {
@@ -68,7 +64,15 @@ function openSearchContent(evt: any) {
     evt.currentTarget.className += " active";
 
 }
-
+function dropBtn(evt: any) {
+  if(document.getElementById("dropMenuContent").style.display == "block")
+  {
+    document.getElementById("dropMenuContent").style.display = "none"
+  }
+  else {
+    document.getElementById("dropMenuContent").style.display = "block"
+  }
+}
 
 // ------------------------
 $(function(){
@@ -81,8 +85,14 @@ $(function(){
         $(".userNameLi")[0].innerHTML = username
 
     }
+    else {
+      document.getElementById('PicLi').style.display = 'none'
+
+    }
     document.getElementById("tablinksO").onclick = openSearchContent
     document.getElementById("tablinksC").onclick = openSearchContent
+    document.getElementById("dropBtn").onclick = dropBtn
+
     $( "#autocomplete" ).autocomplete({
         source: function( request: any, response:any ) {
                 var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
