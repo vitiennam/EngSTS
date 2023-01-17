@@ -16,10 +16,12 @@ module.exports = {
     static: './dist',
   },
   plugins: [
+    //Setting Html file
     new HtmlWebpackPlugin({
       title: 'English Search Web',
       template: './src/index.html',
-      chunks: ['index']
+      //add index.js to Head of index.html file
+      chunks: ['index'] 
     }),
     new HtmlWebpackPlugin({
       title: 'History',
@@ -39,8 +41,10 @@ module.exports = {
       template: './src/login.html',
       chunks: ['login']
     }),
+    
   ],
   module: {
+    //rule load ts file
     rules: [
       {
         test: /\.tsx?$/,
@@ -58,9 +62,11 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
+    //contenthash create hash string to add into filename
     filename: '[name].[contenthash].bundle.js',
     // filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    //Clean dist folder before build code
     clean : true,
     publicPath: "/",
   },

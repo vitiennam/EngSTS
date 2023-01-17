@@ -17,8 +17,8 @@ html {
 li {
     list-style-type: none;
 }
-a, h1, li {
-    font-family: Poppins;
+* {
+    font-family: 'Poppins', sans-serif;
 }
 .dropMenuContent {
     display: none;
@@ -63,6 +63,14 @@ a, h1, li {
     a {
         display: block;
     }
+    
+    
+    .userAccount ul {
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        display: inline-flex;
+    }
 }
 
 @media only screen and (min-width: 701px) {
@@ -80,6 +88,7 @@ a, h1, li {
         display: inline;
         padding: 0em 0.5em;
     }
+
 }
 .topNavBar {
     width: 100%;
@@ -93,6 +102,8 @@ a, h1, li {
     display: inline-flex;
     
 }
+
+
 
 .topsearch {
     height: 35%;
@@ -118,7 +129,7 @@ a, li {
 }
 .searchBar {
     display:flex;
-    width: 50%;
+    width: 65%;
     height: 45px;
     border-style: solid;
     border-radius: 50px;
@@ -141,7 +152,7 @@ input.searchInput:focus {
     height: 100%;
     
 }
-.choiceDicBtn button {
+.btnContent {
     background-color: lightblue;
     border: none;
     padding: 10px 15px;
@@ -153,7 +164,7 @@ input.searchInput:focus {
 
 
 .active {
-    background-color:rgb(38, 211, 211);
+    background-color:rgb(29, 161, 161);
     color: rgb(254, 245, 245);
 }
 

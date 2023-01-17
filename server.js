@@ -11,23 +11,20 @@ const mysql = require('mysql2')
 const randomToken = require('random-token')
 const configMySql = require('./configMySql.js')
 const port = require('./configPort')
-// import  configMySql  from './configMySql'
-// import { configMySql } from './configMySql.js'
+const logOn = true
 //-----------
-var filePathData = "src/data/EWords2.json"
+let filePathData = "src/data/EWords2.json"
 let rawData = fs.readFileSync(filePathData)
-var listWordEng = JSON.parse(rawData)
+let listWordEng = JSON.parse(rawData)
 const con = mysql.createConnection(configMySql)
 //-----------
-// con.connect();
+
 con.connect(function(err) {
   if (err) throw err;
-  console.log("Connected!");
+  if(logOn) console.log("Database Connected!");
 });
 
-
-
-
+//Use Middleware of Webpack
 
 app.use(
     webPackDevMiddleware(compiler,
@@ -43,6 +40,7 @@ app.use(session({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.get('/engDataSearch', (req, res)=>{
     res.end(JSON.stringify(listWordEng))
 } )
@@ -52,35 +50,35 @@ app.post('/login', function(req, res){
 	let password = req.body.userpassword
   const userToken = randomToken(16)
 
-  var sql = 'SELECT * FROM user WHERE email = '+email+' AND password = '+password
-  // var sql = 'SELECT * FROM user WHERE email = ? AND password = ?'
+  let sql = 'SELECT * FROM user WHERE email = '+email+' AND password = '+password
+  // let sql = 'SELECT * FROM user WHERE email = ? AND password = ?'
   console.log('sql: ', sql)
   if (email && password) {
-    // con.query(sql, function(err, results, fields){
+    //Querry email with password
     con.query('SELECT * FROM user WHERE email = ? AND password = ?', [email,password], function(err, results, fields){		
 			if (err) throw err
 			console.log(results)
 			if (results.length > 0) {
+        //Add token of that user to database, If success, save it to user cookie
 				con.query('UPDATE user SET token = ? WHERE email = ?;', [userToken, email], function(err, results1, fields){
           if (err) throw err
           // console.log(results1)
           console.log(results)
           console.log(results[0].username)
-          req.session.loggedin = true
-          req.session.email = results.email
-          req.session.username = results[0].username
+          // req.session.loggedin = true
+          // req.session.email = results.email
+          // req.session.username = results[0].username
   
           // res.json({email:email, token:userToken})
-          var exdays = 15
+          let exdays = 15
           let options = {
-            maxAge: 24 * 60 * 60 * 1000 * exdays, // would expire after 15 minutes
-            // httpOnly: true, // The cookie only accessible by the web server
-            // signed: true // Indicates if the cookie should be signed
+            maxAge: 24 * 60 * 60 * 1000 * exdays, 
         }
+        //add Login infor in cookie of Client
           res.cookie('email', email, options)
           res.cookie('token', userToken, options)
           res.cookie('username', results[0].username, options)
-          // res.write(JSON.stringify({email:email, token:userToken}))
+          //go to home page
           res.redirect('/')
           res.end()
         })
@@ -105,9 +103,8 @@ app.post('/signup', function(req, res){
 	let password = req.body.userpassword;
   let username = req.body.username;
   const userToken = randomToken(16)
-  // INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
-  // var sql = 'INSERT INTO user (username, password, email) VALUES ('+username+','+password+','+email+');'
-  var sql = 'INSERT INTO user (username, password, email, token) VALUES (?,?,?,?);'
+  
+  let sql = 'INSERT INTO user (username, password, email, token) VALUES (?,?,?,?);'
   console.log('sql: ', sql)
   if (email && password && username) {
     con.query('SELECT * FROM user WHERE email = ?', [email], function(err, results, fields){		
@@ -122,7 +119,7 @@ app.post('/signup', function(req, res){
           console.log("1 record inserted")
           // res.write(userToken)
           // res.json({username:username, token:userToken})
-          var exdays = 15
+          let exdays = 15
           let options = {
             maxAge: 24 * 60 * 60 * 1000 * exdays, // would expire after 15 minutes
             // httpOnly: true, // The cookie only accessible by the web server
@@ -157,9 +154,9 @@ app.get('/randomWord', (req,res)=>{
 app.get(/queryWordO/, (req, res)=>{
     
         console.log(req.url)
-        var searchedWord = req.url.split("=")[1]
+        let searchedWord = req.url.split("=")[1]
         console.log(searchedWord)
-        var urlSearchOxford = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ searchedWord+ "?q="+ searchedWord
+        let urlSearchOxford = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ searchedWord+ "?q="+ searchedWord
 
         
         console.log(urlSearchOxford)
@@ -184,4 +181,5 @@ app.get(/queryWordO/, (req, res)=>{
 app.listen(port, function () {
     console.log('Example app listening on port '+port+' !\n');
   })
+//Do not turn off Database
 // con.end();
