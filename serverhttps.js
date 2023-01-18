@@ -13,7 +13,7 @@ const port = require('./configPort')
 const fs = require("fs")
 const https = require("https");
 const sslFile = require('./configSSl')
-
+const logOn = true
 // import  configMySql  from './configMySql'
 // import { configMySql } from './configMySql.js'
 //-----------
