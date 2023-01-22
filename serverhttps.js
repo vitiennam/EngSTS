@@ -5,14 +5,15 @@ const axios = require('axios')
 const app = express()
 const config = require('./webpack.config')
 const compiler = webpack(config)
-const session = require('express-session');
+const session = require('express-session')
 const mysql = require('mysql2')
 const randomToken = require('random-token')
 const configMySql = require('./configMySql.js')
 const port = require('./configPort')
 const fs = require("fs")
-const https = require("https");
+const https = require("https")
 const sslFile = require('./configSSl')
+let cors = require('cors')
 const logOn = true
 // import  configMySql  from './configMySql'
 // import { configMySql } from './configMySql.js'
@@ -42,8 +43,9 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cors)
 
 app.get('/engDataSearch', (req, res)=>{
     res.end(JSON.stringify(listWordEng))
@@ -172,7 +174,11 @@ app.get(/queryWordO/, (req, res)=>{
             res.writeHead(200, {'Content-Type': 'text/html'})
             res.end(response.data)
             // pageSearch += `<div class="col">` + response.data + `</div>`
-            });
+            }).catch(function (error) {
+              // xử trí khi bị lỗi
+              console.log(error);
+              
+            })
           } catch (error) {
             // console.log(error, error.message);
             res.writeHead(404)

@@ -168,7 +168,11 @@ app.get(/queryWordO/, (req, res)=>{
             res.writeHead(200, {'Content-Type': 'text/html'})
             res.end(response.data)
             // pageSearch += `<div class="col">` + response.data + `</div>`
-            });
+            }).catch(function (error) {
+              // xử trí khi bị lỗi
+              console.log(error);
+              
+            })
           } catch (error) {
             // console.log(error, error.message);
             res.writeHead(404)
