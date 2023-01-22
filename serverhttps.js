@@ -13,7 +13,7 @@ const port = require('./configPort')
 const fs = require("fs")
 const https = require("https")
 const sslFile = require('./configSSl')
-let cors = require('cors')
+// let cors = require('cors')
 const logOn = true
 // import  configMySql  from './configMySql'
 // import { configMySql } from './configMySql.js'
@@ -45,7 +45,7 @@ app.use(session({
 }));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors)
+// app.use(cors)
 
 app.get('/engDataSearch', (req, res)=>{
     res.end(JSON.stringify(listWordEng))
