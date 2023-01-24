@@ -12,8 +12,8 @@ const randomToken = require('random-token')
 // const configMySql = require('./configMySql.js')
 // const port = require('./configPort')
 require('dotenv').config()
-console.log(process.env)
-if(process.env.MODE_SSL === 1){
+// console.log(process.env)
+if(process.env.MODE_SSL === '1'){
   const https = require("https")
   port = process.env.PORT_443
 } else{
@@ -24,7 +24,12 @@ const logOn = true
 let filePathData = "src/data/EWords2.json"
 let rawData = fs.readFileSync(filePathData)
 let listWordEng = JSON.parse(rawData)
-const con = mysql.createConnection(configMySql)
+const con = mysql.createConnection({
+  host     : process.env.host_MYSQL,
+  user     : process.env.user_MYSQL,
+  password : process.env.password_MYSQL,
+  database : process.env.database_MYSQL
+})
 //-----------
 
 con.connect(function(err) {
