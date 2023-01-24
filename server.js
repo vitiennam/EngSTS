@@ -198,7 +198,7 @@ app.get(/queryWordO/, (req, res)=>{
 if (process.env.MODE_SSL === '1') {
   https.createServer({
     key: fs.readFileSync(process.env.KEY_SSL),
-    cert: fs.readFileSync(process.cert.CERT_SSL),
+    cert: fs.readFileSync(process.env.CERT_SSL),
   },app).listen(port, ()=>{
     console.log('server https is runing at port' + port)
   });
