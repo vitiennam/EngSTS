@@ -9,12 +9,12 @@ const compiler = webpack(config)
 const session = require('express-session');
 const mysql = require('mysql2')
 const randomToken = require('random-token')
+const https = require("https")
 // const configMySql = require('./configMySql.js')
 // const port = require('./configPort')
 require('dotenv').config()
 // console.log(process.env)
 if(process.env.MODE_SSL === '1'){
-  const https = require("https")
   port = process.env.PORT_443
 } else{
   port = process.env.PORT_8080
