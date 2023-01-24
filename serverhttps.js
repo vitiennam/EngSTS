@@ -162,7 +162,7 @@ app.get(/queryWordO/, (req, res)=>{
         console.log(req.url)
         let searchedWord = req.url.split("=")[1]
         console.log(searchedWord)
-        let urlSearchOxford = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ searchedWord+ "?q="+ searchedWord
+        let urlSearchOxford = "https://www.oxfordlearnersdictionaries.com/definition/english/"+ searchedWord
 
         
         console.log(urlSearchOxford)

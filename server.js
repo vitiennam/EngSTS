@@ -9,8 +9,16 @@ const compiler = webpack(config)
 const session = require('express-session');
 const mysql = require('mysql2')
 const randomToken = require('random-token')
-const configMySql = require('./configMySql.js')
-const port = require('./configPort')
+// const configMySql = require('./configMySql.js')
+// const port = require('./configPort')
+require('dotenv').config()
+console.log(process.env)
+if(process.env.MODE_SSL === 1){
+  const https = require("https")
+  port = process.env.PORT_443
+} else{
+  port = process.env.PORT_8080
+}
 const logOn = true
 //-----------
 let filePathData = "src/data/EWords2.json"
@@ -156,7 +164,7 @@ app.get(/queryWordO/, (req, res)=>{
         console.log(req.url)
         let searchedWord = req.url.split("=")[1]
         console.log(searchedWord)
-        let urlSearchOxford = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ searchedWord+ "?q="+ searchedWord
+        let urlSearchOxford = "https://www.oxfordlearnersdictionaries.com/definition/english/"+ searchedWord
 
         
         console.log(urlSearchOxford)
@@ -182,8 +190,19 @@ app.get(/queryWordO/, (req, res)=>{
     
 } )
 
-app.listen(port, function () {
+if (process.env.MODE_SSL === 1) {
+  https.createServer({
+    key: fs.readFileSync(process.env.KEY_SSL),
+    cert: fs.readFileSync(sslFile.cert.CERT_SSL),
+  },app).listen(port, ()=>{
+    console.log('server is runing at port' + port)
+  });
+} else {
+  app.listen(port, function () {
     console.log('Example app listening on port '+port+' !\n');
   })
+}
+
+
 //Do not turn off Database
 // con.end();

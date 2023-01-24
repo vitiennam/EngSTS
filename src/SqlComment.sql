@@ -7,7 +7,7 @@ CREATE DATABASE IF NOT EXISTS engsdb DEFAULT CHARACTER SET utf8 COLLATE utf8_gen
 shows databases;
 -- Access Database
 USE engsdb;
--- Create Table
+-- Create Table user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
@@ -17,6 +17,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+-- Create table engWord
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `word` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `token` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 --Show all tables:
 
 Show tables;
@@ -27,3 +36,19 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 't
 ALTER TABLE user ADD COLUMN token VARCHAR(16) AFTER email;
 
 UPDATE user SET token = ? WHERE username = ?;
+-- ----------------------------------------------------
+CREATE USER 'engs'@'125.212.172.117';
+CREATE USER 'user_name'@'127.0.0.1';
+
+CREATE USER 'engs'@'125.212.172.117'
+  IDENTIFIED BY '1234';
+GRANT ALL
+  ON *.*
+  TO 'engs'@'125.212.172.117'
+  WITH GRANT OPTION;
+
+
+  SHOW GRANTS FOR 'engs'@'125.212.172.117';
+-- change pass
+  ALTER USER 'engs'@'125.212.172.117' IDENTIFIED BY '1234'; 
+  flush privileges;

@@ -7,3 +7,4 @@ configMySql.js
 configPort.js
 configSSl.js
 *.service
+*.env
