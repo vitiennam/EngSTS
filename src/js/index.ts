@@ -67,6 +67,8 @@ function openSearchContent(evt: any) {
 
 }
 function dropBtn(evt: any) {
+
+  // document.getElementById("dropMenuContent").classList.toggle("show")
   if(document.getElementById("dropMenuContent").style.display == "block")
   {
     document.getElementById("dropMenuContent").style.display = "none"
@@ -86,18 +88,32 @@ $(function(){
 
     if(username) {
         $(".userNameLi")[0].innerHTML = username
+        $(".userNameLiInMenu")[0].innerHTML = username
 
+        document.getElementById("userAccount").classList.toggle("userAccountToggle")
+        document.getElementById("logOutInMenu").style.display= 'block'
     }
     else {
-      document.getElementById('PicLi').style.display = 'none'
+      // document.getElementById('PicLi').style.display = 'none'
+      document.getElementById("logOutInMenu").style.display= 'none'
+
 
     }
     document.getElementById("tablinksO").onclick = openSearchContent
     document.getElementById("tablinksC").onclick = openSearchContent
     document.getElementById("dropBtn").onclick = dropBtn
+    // console.log(document.getElementsByClassName("logOut")[0])
+    // console.log(document.getElementById("logOut").onli)
+
+    document.getElementById("logOut").onclick = logOut
+    document.getElementById("logOutInMenu").onclick = logOut
+
+    // Check click
     document.onclick = function(evt: any) {
+      // console.log(document.getElementById("dropMenuContent").style.display)
       if(document.getElementById("dropMenuContent").style.display == "block")
       {
+        
         if( notClick.includes(evt.target.id) == false) {
           console.log(evt.target.id)
 
@@ -106,6 +122,19 @@ $(function(){
       }
       
     }
+
+    // window.onclick = function(event:any) {
+    //   if (!event.target.matches('.dropBtn')) {
+    //     var dropdowns = document.getElementsByClassName("dropMenuContent");
+    //     var i;
+    //     for (i = 0; i < dropdowns.length; i++) {
+    //       var openDropdown = dropdowns[i];
+    //       if (openDropdown.classList.contains('show')) {
+    //         openDropdown.classList.remove('show');
+    //       }
+    //     }
+    //   }
+    // }
     $( "#autocomplete" ).autocomplete({
         source: function( request: any, response:any ) {
                 var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );

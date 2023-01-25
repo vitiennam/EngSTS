@@ -46,6 +46,12 @@ app.use(
         })
     
 )
+// app.use(require("webpack-hot-middleware")(compiler, {
+//   log: false,
+//   path: "/__what",
+//   heartbeat: 2000,
+//   reload: true
+// }))
 app.use(session({
 	secret: 'secret',
 	resave: true,

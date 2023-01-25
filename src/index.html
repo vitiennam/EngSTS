@@ -14,9 +14,9 @@
         <title>EngS</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-3.6.3.js"></script>
+        <script src="//code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <!-- <link rel="stylesheet" href="css/index.css"> -->
     </head>
     <body>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="navFeature">
                             <ul>
-                                <li><a href="/">Home</a></li>
+                                <li><a href="/">Home a</a></li>
                                 <li><a href="flash_card.html">Flash Card</a></li>
                                 <li><a href="history.html">History</a></li>
                             </ul>
@@ -39,11 +39,18 @@
                     </div>
                     
                     
-                    <div class="userAccount">
+                    <div class="userAccount" id="userAccount">
                         <ul>
                             <li class="userNameLi"><a href="login.html">Log In</a></li>
-                            <li class="PicLi" id="PicLi">pic</li>
+                            <!-- <li class="PicLi" id="PicLi">pic</li> -->
+                            <div class="dropInforAccount">
+                                <button class="account" id="logOut"> Account</button>
+                                <button class="Setting" id="logOut"> Setting</button>
+
+                                <button class="logOut" id="logOut"> Log Out</button>
+                            </div>
                         </ul>
+                        
                         <div class="dropMenu" id="dropMenu">
                             <button id="dropBtn">
                                 <div class="dropClick" id="dropClick">
@@ -60,13 +67,19 @@
 
                     </div>
                 </div>
+                
                 <div class="dropMenuContent" id="dropMenuContent">
                     <ul>
+                        <li class="userNameLiInMenu"><a href="login.html">Log In</a></li>
                         <li><a href="/">Home</a></li>
                         <li><a href="flash_card.html">Flash Card</a></li>
                         <li><a href="history.html">History</a></li>
+                        <li class="logOut" id="logOutInMenu">Log Out</li>
+
+                        <!-- <button class="logOut" id="logOutInMenu"> Log Out</button> -->
                     </ul>
                 </div>
+
                 <div class="searchDiv">
                     <div class="searchBar">
                         <input type="search" class="searchInput" id="autocomplete">

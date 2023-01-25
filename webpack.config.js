@@ -1,21 +1,29 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// var webpack = require('webpack');
 
 module.exports = {
-  // mode: "development",
-  mode: "production",
+  mode: "development",
+  // mode: "production",
   entry: {
     index: "./src/js/index.ts",
     history: "./src/js/history.ts",
     flashCard: "./src/js/flashCard.ts",
     login:"./src/js/login.ts",
+    // main: ['webpack-hot-middleware/client', './src/main.js'],
+
+    // index: ['webpack-hot-middleware/client',  "./src/js/index.ts"],
+    // history: ['webpack-hot-middleware/client',  "./src/js/history.ts"] ,
+    // flashCard: ['webpack-hot-middleware/client', "./src/js/flashCard.ts"],
+    // login: ['webpack-hot-middleware/client', "./src/js/login.ts"],
 
   },
-  // devtool: 'inline-soure-map',
+  devtool: 'inline-source-map',
   devServer: {
     static: './dist',
   },
   plugins: [
+    // new webpack.HotModuleReplacementPlugin(),
     //Setting Html file
     new HtmlWebpackPlugin({
       title: 'English Search Web',

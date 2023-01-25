@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 html {
     height: 100%;
     width: 100%;
@@ -30,6 +31,42 @@ li {
     height: 100%;
     
 }
+.userAccount {
+    width: 10%;
+}
+.userAccount ul {
+    padding: 0px;
+    width: 100%;
+}
+
+.dropInforAccount button {
+    
+    border: none;
+    background-color: white;
+    font-size: large;
+    color:rgb(3, 110, 233);
+    
+}
+
+.dropInforAccount {
+    position: absolute;
+    display: none;
+    z-index: 20;
+
+}
+
+.show {display: block;}
+.userAccountToggle:hover .dropInforAccount {
+    display: block;
+}
+.dropInforAccount button:hover {
+    background-color: rgb(152, 219, 235);
+    transition: 0.2s;
+}
+div.userAccount {
+    
+}
+
 @media only screen and (max-width: 700px) {
     .navFeature {
         display: none;
@@ -60,6 +97,10 @@ li {
     .dropMenuContent li {
         display: block;
     }
+    .dropMenuContent li:hover {
+        background-color: rgb(152, 219, 235);
+        transition: 0.2s;
+    }
     a {
         display: block;
     }
@@ -70,6 +111,12 @@ li {
         height: 100%;
         padding: 0px;
         display: inline-flex;
+    }
+    .userAccountToggle:hover .dropInforAccount {
+        display: none;
+    }
+    .userNameLi {
+        display: none;
     }
 }
 
@@ -86,8 +133,26 @@ li {
     }
     .topNavBar li {
         display: inline;
-        padding: 0em 0.5em;
+        margin: 0 0.6rem;
     }
+    li.userNameLi {
+        display: block;
+        margin: 0%;
+        /* padding: 0%; */
+        width: 100%;
+        text-align: left;
+    }
+    li.userNameLi:hover {
+        background-color: rgb(152, 219, 235);
+        transition: 0.2s;
+    }
+    .userAccount ul {
+        margin: 0px;
+        /* display: inline-flex;
+        justify-content: center; */
+    }
+
+    
 
 }
 .topNavBar {
@@ -116,6 +181,7 @@ a, li {
     text-decoration: none;
     color:rgb(3, 110, 233);
     font-size: large;
+    
 }
 
 
