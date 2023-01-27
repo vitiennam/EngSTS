@@ -1,10 +1,43 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // var webpack = require('webpack');
-
-module.exports = {
-  mode: "development",
+require('dotenv').config()
   // mode: "production",
+  // mode: "development",
+const devMode = process.env.NODE_ENV === "production";
+let pluginsSetting = [
+  // new webpack.HotModuleReplacementPlugin(),
+  //Setting Html file
+  new HtmlWebpackPlugin({
+    title: 'English Search Web',
+    template: './src/index.html',
+    //add index.js to Head of index.html file
+    chunks: ['index'] 
+  }),
+  new HtmlWebpackPlugin({
+    title: 'History',
+    filename: 'history.html',
+    template: './src/history.html',
+    chunks: ['history']
+  }),
+  new HtmlWebpackPlugin({
+    title: 'flash_card',
+    filename: 'flash_card.html',
+    template: './src/flash_card.html',
+    chunks: ['flashCard']
+  }),
+  new HtmlWebpackPlugin({
+    title: 'login',
+    filename: 'login.html',
+    template: './src/login.html',
+    chunks: ['login']
+  }),
+  
+]
+let exportSetting = {
+  mode: process.env.NODE_ENV,
+
   entry: {
     index: "./src/js/index.ts",
     history: "./src/js/history.ts",
@@ -18,39 +51,10 @@ module.exports = {
     // login: ['webpack-hot-middleware/client', "./src/js/login.ts"],
 
   },
-  devtool: 'inline-source-map',
   devServer: {
     static: './dist',
   },
-  plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
-    //Setting Html file
-    new HtmlWebpackPlugin({
-      title: 'English Search Web',
-      template: './src/index.html',
-      //add index.js to Head of index.html file
-      chunks: ['index'] 
-    }),
-    new HtmlWebpackPlugin({
-      title: 'History',
-      filename: 'history.html',
-      template: './src/history.html',
-      chunks: ['history']
-    }),
-    new HtmlWebpackPlugin({
-      title: 'flash_card',
-      filename: 'flash_card.html',
-      template: './src/flash_card.html',
-      chunks: ['flashCard']
-    }),
-    new HtmlWebpackPlugin({
-      title: 'login',
-      filename: 'login.html',
-      template: './src/login.html',
-      chunks: ['login']
-    }),
-    
-  ],
+  plugins: pluginsSetting,
   module: {
     //rule load ts file
     rules: [
@@ -60,9 +64,18 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(sa|sc|c)ss$/i,
+        use: [
+          devMode ? MiniCssExtractPlugin.loader  : "style-loader",
+          "css-loader",
+          // "postcss-loader",
+          // "sass-loader",
+        ],
       },
+      // {
+      //   test: /\.css$/i,
+      //   use: ['style-loader', 'css-loader'],
+      // },
     ],
     
   },
@@ -81,4 +94,12 @@ module.exports = {
   optimization: {
     runtimeChunk: "single"
   }
-};
+}
+if(devMode){
+  pluginsSetting.push(new MiniCssExtractPlugin())
+ 
+} else {
+  exportSetting.devtool = 'inline-source-map'
+}
+
+module.exports = exportSetting

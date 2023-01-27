@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <!-- Google tag (gtag.js) -->
-        
+
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-LN3XE1TTVG"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
@@ -11,106 +11,73 @@
 
         gtag('config', 'G-LN3XE1TTVG');
         </script>
-        <title>EngS</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-3.6.3.js"></script>
-        <script src="//code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-        <!-- <link rel="stylesheet" href="css/index.css"> -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>English Search</title>
+        <!-- <link rel="stylesheet" href="css/index2.css"> -->
     </head>
     <body>
         <div class="container">
-            <div class="topsearch">
-                
-                <div class="topNavBar">
-                    <div>
-                        <div class="logo">
-                            <h1>English Search</h1>
-                        </div>
-                        <div class="navFeature">
-                            <ul>
-                                <li><a href="/">Home a</a></li>
-                                <li><a href="flash_card.html">Flash Card</a></li>
-                                <li><a href="history.html">History</a></li>
-                            </ul>
-                        </div>
-    
-                    </div>
-                    
-                    
-                    <div class="userAccount" id="userAccount">
-                        <ul>
-                            <li class="userNameLi"><a href="login.html">Log In</a></li>
-                            <!-- <li class="PicLi" id="PicLi">pic</li> -->
-                            <div class="dropInforAccount">
-                                <button class="account" id="logOut"> Account</button>
-                                <button class="Setting" id="logOut"> Setting</button>
-
-                                <button class="logOut" id="logOut"> Log Out</button>
-                            </div>
-                        </ul>
+            <div class="navBox">
+                <nav class="navBar">
+                    <a class="navTitle" href="http://">English Search</a>
+                    <ul class="navLinks">
+                        <li class="navli"><a href="/">Home</a></li>
+                        <li class="navli"><a href="">Flash Card</a></li>
+                        <li class="navli"><a href="">History</a></li>
                         
-                        <div class="dropMenu" id="dropMenu">
-                            <button id="dropBtn">
-                                <div class="dropClick" id="dropClick">
-                                    <div id="t1"></div>
-                                    <div id="t2"></div>
-                                    <div id="t3"></div>
-                                </div>
-                            </button>
-                            
-                            
+                    </ul>
+                    <ul class="account">
+                        <li class="login-accountName" id="login-accountName"><a href="">Log In</a></li>
+                        <li id="hamburger"></li>
+            </div>
+            <div class="containerSearchAndNav">
+                <div class="searchBoxAndContent">
+                    <div class="searchBox">
+                        <div class="inputBox">
+                            <input id="autocomplete" type="text" class="inputSearch">
                         </div>
-
-
-
+                        <div class="showListBox">
+                            <div class="showList" id="showList">
+                            
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="searchContent" id="tabSeach">
+                        <div class="choiceDicBtn">
+                            <button class="btnContent active" id="tablinksO">Oxford</button>
+                            <button class="btnContent" id="tablinksC">Cambridge</button>
+                        </div>
+                        <div id="divIframeSeachO">
+                            <iframe id="SearchContentO" class="tabcontent"></iframe>
+                        </div>
+                        
+                        
+                        <div id="divIframeSeach">
+                            <iframe class="iframe" id="SearchContentIframe"></iframe>
+                        </div>
+        
+        
                     </div>
                 </div>
                 
-                <div class="dropMenuContent" id="dropMenuContent">
-                    <ul>
-                        <li class="userNameLiInMenu"><a href="login.html">Log In</a></li>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="flash_card.html">Flash Card</a></li>
-                        <li><a href="history.html">History</a></li>
-                        <li class="logOut" id="logOutInMenu">Log Out</li>
-
-                        <!-- <button class="logOut" id="logOutInMenu"> Log Out</button> -->
+                <div class="navSide" id="navSide" >
+                    <ul class="navLinksSide">
+                        <li class="navli"><svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">  .st0{fill:#000000;}  </style> <g> <path class="st0" d="M395.141,193.75V90.781h-47.703v55.266l-53.375-53.391L256,54.625l-38.063,38.031L0,310.609l38.063,38.063 l41.813-41.828v150.531h352.25V306.844l41.813,41.828L512,310.609L395.141,193.75z M245.578,396.719h-54.484v-54.5h54.484V396.719z M245.578,321.063h-54.484v-54.5h54.484V321.063z M320.906,396.719h-54.484v-54.5h54.484V396.719z M320.906,321.063h-54.484v-54.5 h54.484V321.063z"></path> </g> </g></svg><a href="/">Home</a></li>
+                        <li class="navli"><svg width="64px" height="64px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M386.688 487.75l-119.236-55.423c-7.898-3.673-11.334-13.065-7.66-20.976l84.374-181.523c3.667-7.904 13.07-11.334 20.963-7.667l119.24 55.434c7.9 3.673 11.33 13.065 7.656 20.964l-84.37 181.524c-3.678 7.904-13.076 11.334-20.968 7.667zM98.95 467.945L19.79 284.09c-3.448-8.007.255-17.302 8.25-20.744l39.196-16.872 48.975 184.044c4.694 17.588 22.755 28.078 40.36 23.39l39.032-10.386-75.907 32.686c-8.007 3.443-17.296-.255-20.744-8.262zm33.89-41.86L81.362 232.638c-2.24-8.42 2.78-17.078 11.19-19.312l34.033-9.052-4.098 30.465c-2.422 18.036 10.224 34.652 28.285 37.087l79.828 10.758-32.497 109.467c-3.345 11.28-.37 22.948 6.866 31.18l-52.82 14.05c-8.42 2.24-17.07-2.77-19.31-11.196zm108.428-4.76l-16.02-4.76c-8.36-2.49-13.12-11.267-10.644-19.627l56.97-191.9c2.484-8.36 11.28-13.12 19.622-10.65l49.073 14.583.008-.005.12.044-.133-.034c-4.93 3.254-9.04 7.868-11.705 13.605l-84.38 181.53c-2.587 5.586-3.486 11.517-2.915 17.218zm-5.707-155.43l-82.486-11.117c-8.633-1.166-14.704-9.12-13.538-17.758l26.73-198.39c1.16-8.633 9.125-14.698 17.74-13.538l130.327 17.563c8.627 1.166 14.692 9.125 13.532 17.752L311.42 182.46l-15.33-4.552c-17.467-5.197-35.826 4.784-41.004 22.232l-19.525 65.755zm-5.19-31.46c4.67-3.055 7.474-7.438 8.42-13.145.936-5.633-.357-10.617-3.866-14.945-3.51-4.414-8.39-7.14-14.656-8.178-6.344-1.057-11.93-.073-16.75 2.956-4.826 3.03-7.692 7.316-8.615 12.87-.898 5.386.425 10.42 3.97 15.082 3.565 4.504 8.525 7.285 14.863 8.34 6.35 1.057 11.893.062 16.634-2.98zm25.978-81.243c4.693-2.726 8.888-5.434 12.598-8.117 3.703-2.684 6.915-5.586 9.635-8.725 2.72-3.13 4.967-6.573 6.733-10.307 1.76-3.74 3.048-8.032 3.85-12.865 1.262-7.62 1.02-14.358-.735-20.234-1.75-5.87-4.693-10.94-8.833-15.22-4.135-4.27-9.24-7.753-15.318-10.43-6.07-2.684-12.804-4.633-20.174-5.86-7.692-1.28-15.3-1.602-22.815-.977-7.516.614-14.63 2.247-21.346 4.88l-5.95 35.802c6.813-4.25 13.77-7.104 20.855-8.567 7.09-1.475 13.726-1.7 19.913-.668 21.467 4.092 19.44 24.898 8.76 34.03-5.652 4.473-11.334 8.802-15.942 11.345-10.48 5.914-27.69 23.125-22.542 45.145l31.284 5.202c-7.11-17.757 11.663-29.462 20.028-34.434z"></path></g></svg><a href="">Flash Card</a></li>
+                        <li class="navli"><svg viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_429_11075)"> <path d="M5.63606 18.3639C9.15077 21.8786 14.8493 21.8786 18.364 18.3639C21.8787 14.8492 21.8787 9.1507 18.364 5.63598C14.8493 2.12126 9.15077 2.12126 5.63606 5.63598C3.87757 7.39447 2.99889 9.6996 3.00002 12.0044L3 13.9999" stroke="#292929" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M1 11.9999L3 13.9999L5 11.9999" stroke="#292929" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M11 7.99994L11 12.9999L16 12.9999" stroke="#292929" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path> </g> <defs> <clipPath id="clip0_429_11075"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g></svg><a href="">History</a></li>
+                        
+                    </ul>
+                    <ul class="bottomNav">
+                        <li class="navli" id="logOut"><svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 20H6C4.89543 20 4 19.1046 4 18L4 6C4 4.89543 4.89543 4 6 4H14M10 12H21M21 12L18 15M21 12L18 9" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> Log Out</li>
                     </ul>
                 </div>
-
-                <div class="searchDiv">
-                    <div class="searchBar">
-                        <input type="search" class="searchInput" id="autocomplete">
-
-                    </div>
-                </div>
-
             </div>
 
-            <div class="searchContent" id="tabSeach">
-                <div class="choiceDicBtn">
-                    <button class="btnContent active" id="tablinksO">Oxford</button>
-                    <button class="btnContent" id="tablinksC">Cambridge</button>
-                </div>
-                <div id="divIframeSeachO">
-                    <iframe id="SearchContentO" class="tabcontent"></iframe>
-                </div>
-                
-                
-                <div id="divIframeSeach">
-                    <iframe class="iframe" id="SearchContentIframe"></iframe>
-                </div>
-
-
-            </div>
         </div>
+
         
-
-
-
-        <!-- <script type="scripttype" src="js/index.ts"></script> -->
     </body>
 </html>
-

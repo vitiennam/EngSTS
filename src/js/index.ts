@@ -1,10 +1,14 @@
 
 import * as commonFunc from "./common"
 import "../css/index.css"
+import $ from 'jquery'
+
+import './jquery-ui'
+// import 'jquery-ui'
 
 var engDataSearch: ArrayLike<String>
 var userHistory: any[]
-var notClick = ['dropMenuContent', 'dropMenu', 'dropBtn', 'dropClick', 't1', 't2', 't3'];
+// var notClick = ['dropMenuContent', 'dropMenu', 'dropBtn', 'dropClick', 't1', 't2', 't3'];
 
 if(localStorage.userHistoryWord) {
   userHistory = JSON.parse(localStorage.userHistoryWord) 
@@ -26,6 +30,7 @@ function logOut(evt: any){
     commonFunc.setCookie('username',"", 15)
     commonFunc.setCookie('email',"", 15)
     commonFunc.setCookie('token',"", 15)
+    $(".login-accountName")[0].innerHTML = `a href="login.html">Log In</a>`
     location.reload()
   }
 function openSearchContent(evt: any) {
@@ -66,115 +71,145 @@ function openSearchContent(evt: any) {
     evt.currentTarget.className += " active";
 
 }
-function dropBtn(evt: any) {
+function navSideBtn(evt: any) {
 
   // document.getElementById("dropMenuContent").classList.toggle("show")
-  if(document.getElementById("dropMenuContent").style.display == "block")
+  if(document.getElementById("navSide").style.display == "flex")
   {
-    document.getElementById("dropMenuContent").style.display = "none"
+    document.getElementById("navSide").style.display = "none"
   }
   else {
-    document.getElementById("dropMenuContent").style.display = "block"
+    document.getElementById("navSide").style.display = "flex"
+  }
+}
+function choseWord (evt: any) {
+  console.log(evt.currentTarget.innerHTML)
+}
+function inputChange (ev: Event) {
+  let inputValue = this.value
+  let showTag = document.getElementById('showList')
+  showTag.innerHTML = ''
+  if(inputValue){
+    
+    
+    showTag.style.display = 'block'
+    // let showWord = ``
+    for(let i = 0; i < 10; i++){
+      // showWord += `<li class='liSearchResult' onclick=${choseWord}>${inputValue}</li>`
+      let liTag = document.createElement('li')
+      liTag.innerHTML = inputValue
+      liTag.className = 'liSearchResult'
+      liTag.onclick = choseWord
+      showTag.appendChild(liTag)
+      // console.log(showWord)
+      
+      
+    }
+    // let listLiTag = document.querySelectorAll('.liSearchResult')
+    // listLiTag.forEach(liTag => liTag.onclick )
+    // showTag.innerHTML = showWord
+    
+  } else {
+    showTag.style.display = 'none'
   }
 }
 
-
 // ------------------------
-$(function(){
+document.onreadystatechange = () => {
+  document.getElementById('autocomplete').addEventListener('input', inputChange)
+    
+  var email = commonFunc.getCookie('email')
+  var username = commonFunc.getCookie('username')
+  var token = commonFunc.getCookie('token')
 
-    var email = commonFunc.getCookie('email')
-    var username = commonFunc.getCookie('username')
-    var token = commonFunc.getCookie('token')
+  if(username) {
+    // console.log($(".login-accountName")[0])
+      $(".login-accountName")[0].innerHTML = username
 
-    if(username) {
-        $(".userNameLi")[0].innerHTML = username
-        $(".userNameLiInMenu")[0].innerHTML = username
+      // document.getElementById("userAccount").classList.toggle("userAccountToggle")
+      // document.getElementById("logOutInMenu").style.display= 'block'
+  }
 
-        document.getElementById("userAccount").classList.toggle("userAccountToggle")
-        document.getElementById("logOutInMenu").style.display= 'block'
-    }
-    else {
-      // document.getElementById('PicLi').style.display = 'none'
-      document.getElementById("logOutInMenu").style.display= 'none'
+  document.getElementById("tablinksO").onclick = openSearchContent
+  document.getElementById("tablinksC").onclick = openSearchContent
+  document.getElementById("hamburger").onclick = navSideBtn
+  // console.log(document.getElementsByClassName("logOut")[0])
+  // console.log(document.getElementById("logOut").onli)
 
+  document.getElementById("logOut").onclick = logOut
+  // document.getElementById("logOutInMenu").onclick = logOut
 
-    }
-    document.getElementById("tablinksO").onclick = openSearchContent
-    document.getElementById("tablinksC").onclick = openSearchContent
-    document.getElementById("dropBtn").onclick = dropBtn
-    // console.log(document.getElementsByClassName("logOut")[0])
-    // console.log(document.getElementById("logOut").onli)
-
-    document.getElementById("logOut").onclick = logOut
-    document.getElementById("logOutInMenu").onclick = logOut
-
-    // Check click
-    document.onclick = function(evt: any) {
-      // console.log(document.getElementById("dropMenuContent").style.display)
-      if(document.getElementById("dropMenuContent").style.display == "block")
-      {
-        
-        if( notClick.includes(evt.target.id) == false) {
-          console.log(evt.target.id)
-
-          document.getElementById("dropMenuContent").style.display = "none"
-        }
-      }
+  // Check click
+  // document.onclick = function(evt: any) {
+  //   // console.log(document.getElementById("dropMenuContent").style.display)
+  //   if(document.getElementById("dropMenuContent").style.display == "block")
+  //   {
       
-    }
+  //     if( notClick.includes(evt.target.id) == false) {
+  //       console.log(evt.target.id)
 
-    // window.onclick = function(event:any) {
-    //   if (!event.target.matches('.dropBtn')) {
-    //     var dropdowns = document.getElementsByClassName("dropMenuContent");
-    //     var i;
-    //     for (i = 0; i < dropdowns.length; i++) {
-    //       var openDropdown = dropdowns[i];
-    //       if (openDropdown.classList.contains('show')) {
-    //         openDropdown.classList.remove('show');
-    //       }
-    //     }
-    //   }
-    // }
-    $( "#autocomplete" ).autocomplete({
-        source: function( request: any, response:any ) {
-                var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-                response( $.grep( engDataSearch, function( item: any ){
-                    return matcher.test( item );
-                }) );
-            },
-        select: function( event: any, ui: any ) {
-          userHistory.push(ui.item.value)
-          // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
-            // console.log(ui)
-            document.getElementById('tabSeach').style.display = 'block'
-            // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
-            // document.getElementById('SearchContentIframe').style.width = '0%'
-            // document.getElementById('SearchContentIframe').style.height = '0%'
-            // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
-            document.getElementById('SearchContentIframe').setAttribute('src', "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value)
-            document.getElementById('divIframeSeach').style.display = 'none'
-            // document.getElementById('SearchContentO').attributes.source = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ ui.item.value+ "?q="+ ui.item.value
-            // console.log("link source " +String( document.getElementById('SearchContentO').attributes))
-            // document.getElementById('SearchContentC').attributes.source = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
+  //       document.getElementById("dropMenuContent").style.display = "none"
+  //     }
+  //   }
     
-            $.get("queryWordO="+ui.item.value, function(data, status){
-                // alert("\nStatus: " + status);
-                // data.getElementById('ad_leftslot_container').remove
-                // document.getElementById('SearchContentO').innerHTML = data
-                // document.getElementById('SearchContentO').style.width = '100%'
-                // document.getElementById('SearchContentO').style.height = '1000px'
-                document.getElementById('SearchContentO').setAttribute('srcdoc', data)
-    
-              });
+  // }
 
-    
-        }
-    }
-    )
-    window.onbeforeunload = function () {
-        localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
-      };
+  // window.onclick = function(event:any) {
+  //   if (!event.target.matches('.dropBtn')) {
+  //     var dropdowns = document.getElementsByClassName("dropMenuContent");
+  //     var i;
+  //     for (i = 0; i < dropdowns.length; i++) {
+  //       var openDropdown = dropdowns[i];
+  //       if (openDropdown.classList.contains('show')) {
+  //         openDropdown.classList.remove('show');
+  //       }
+  //     }
+  //   }
+  // }
+  $( "#autocompleteD" ).autocomplete({
+      source: function( request: any, response:any ) {
+              var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+              response( $.grep( engDataSearch, function( item: any ){
+                  return matcher.test( item );
+              }) );
+          },
+      select: function( event: any, ui: any ) {
+        userHistory.push(ui.item.value)
+        // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+          // console.log(ui)
+          document.getElementById('tabSeach').style.display = 'block'
+          // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
+          // document.getElementById('SearchContentIframe').style.width = '0%'
+          // document.getElementById('SearchContentIframe').style.height = '0%'
+          // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
+          document.getElementById('SearchContentIframe').setAttribute('src', "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value)
+          document.getElementById('divIframeSeach').style.display = 'none'
+          // document.getElementById('SearchContentO').attributes.source = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ ui.item.value+ "?q="+ ui.item.value
+          // console.log("link source " +String( document.getElementById('SearchContentO').attributes))
+          // document.getElementById('SearchContentC').attributes.source = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
+  
+          $.get("queryWordO="+ui.item.value, function(data, status){
+              // alert("\nStatus: " + status);
+              // data.getElementById('ad_leftslot_container').remove
+              // document.getElementById('SearchContentO').innerHTML = data
+              // document.getElementById('SearchContentO').style.width = '100%'
+              // document.getElementById('SearchContentO').style.height = '1000px'
+              document.getElementById('SearchContentO').setAttribute('srcdoc', data)
+  
+            });
 
-})
+  
+      }
+  }
+  )
+
+  window.onbeforeunload = function () {
+      localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+    };
+}
+// $(function(){
+
+
+// })
 
 
