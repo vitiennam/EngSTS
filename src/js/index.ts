@@ -8,6 +8,10 @@ import './jquery-ui'
 
 var engDataSearch: ArrayLike<String>
 var userHistory: any[]
+let numChoseLi = -1
+let keyAccept = ['ArrowUp', 'ArrowDown', 'Down', 'Up', 'Enter']
+
+
 // var notClick = ['dropMenuContent', 'dropMenu', 'dropBtn', 'dropClick', 't1', 't2', 't3'];
 
 if(localStorage.userHistoryWord) {
@@ -83,23 +87,28 @@ function navSideBtn(evt: any) {
   }
 }
 function choseWord (evt: any) {
-  console.log(evt.currentTarget.innerHTML)
+  console.log('click: ', evt.currentTarget.innerHTML)
 }
 function inputChange (ev: Event) {
   let inputValue = this.value
   let showTag = document.getElementById('showList')
+  let inputTag = document.getElementById('autocomplete')
   showTag.innerHTML = ''
   if(inputValue){
     
     
     showTag.style.display = 'block'
+    
+    inputTag.style.borderRadius = '25px 25px 0 0'
     // let showWord = ``
     for(let i = 0; i < 10; i++){
       // showWord += `<li class='liSearchResult' onclick=${choseWord}>${inputValue}</li>`
       let liTag = document.createElement('li')
-      liTag.innerHTML = inputValue
+      liTag.innerHTML = inputValue + i
       liTag.className = 'liSearchResult'
+      liTag.style.fontSize = '1.5rem'
       liTag.onclick = choseWord
+      
       showTag.appendChild(liTag)
       // console.log(showWord)
       
@@ -111,13 +120,78 @@ function inputChange (ev: Event) {
     
   } else {
     showTag.style.display = 'none'
+    inputTag.style.borderRadius = '50px'
+    numChoseLi = -1
+  }
+}
+
+
+
+function keyUp(evt: KeyboardEvent) {
+  console.log("key Up: ", evt.key)
+  
+  let showTag = document.getElementById('showList')
+  let listLiTag = showTag.getElementsByTagName('li')
+  // console.log(showTag.style.display)
+  // (evt.key == 'ArrowUp' || evt.key == 'ArrowDown')
+  if(showTag.style.display == 'block' && keyAccept.includes(evt.key)) {
+    // numChoseLi += 1
+    console.log("key Down 2")
+    if(listLiTag){
+      
+      // console.log(evt.key)
+      if (['ArrowUp', 'Up'].includes(evt.key)) {
+        if(numChoseLi >= 0){
+          listLiTag[numChoseLi].classList.toggle('activeLi') 
+          // listLiTag[numChoseLi].onkeyup = null
+        }
+        // up arrow
+        console.log("up")
+        numChoseLi -= 1
+        
+        if (numChoseLi < 0){
+          numChoseLi = listLiTag.length - 1
+        }
+        console.log(numChoseLi)
+        console.log(numChoseLi)
+        console.log(listLiTag[numChoseLi])
+        listLiTag[numChoseLi].classList.toggle('activeLi')
+
+        listLiTag[numChoseLi].scrollIntoView({block: 'nearest'})
+      }
+      else if (['ArrowDown', 'Down'].includes(evt.key)) {
+        if(numChoseLi >= 0){
+          listLiTag[numChoseLi].classList.toggle('activeLi') 
+          // listLiTag[numChoseLi].onkeyup = null
+        }
+          // down arrow
+          console.log("down")
+          numChoseLi += 1
+          
+          if (numChoseLi > listLiTag.length - 1){
+            numChoseLi = 0
+          }
+          console.log(numChoseLi)
+          console.log(numChoseLi)
+          console.log(listLiTag[numChoseLi])
+          listLiTag[numChoseLi].classList.toggle('activeLi')
+
+          listLiTag[numChoseLi].scrollIntoView({block: 'nearest'})
+      } else if(evt.key == 'Enter') {
+        console.log("enter event ", numChoseLi)
+        listLiTag[numChoseLi].click()
+      }
+      
+      // console.log(listLiTag[numChoseLi].style.backgroundColor)
+    
+    }
   }
 }
 
 // ------------------------
 document.onreadystatechange = () => {
   document.getElementById('autocomplete').addEventListener('input', inputChange)
-    
+  document.onkeyup = keyUp
   var email = commonFunc.getCookie('email')
   var username = commonFunc.getCookie('username')
   var token = commonFunc.getCookie('token')
@@ -205,11 +279,11 @@ document.onreadystatechange = () => {
 
   window.onbeforeunload = function () {
       localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
-    };
+    }
 }
+
+
 // $(function(){
 
 
 // })
-
-
