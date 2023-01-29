@@ -22,7 +22,10 @@ const con = mysql.createConnection({
   let listWordEng = JSON.parse(rawData)
   let sql = 'INSERT INTO englishword (word) VALUES (?);'
   for(let i = 0; i < listWordEng.length; i++){
-      console.log(listWordEng[i])
+      if(i % 1000 == 0){
+        console.log(listWordEng[i])
+
+      }
       con.query(sql, [listWordEng[i]],function(err,result,fields){
         if (err) {
             console.log(err)
