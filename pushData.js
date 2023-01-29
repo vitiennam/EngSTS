@@ -16,7 +16,7 @@ const con = mysql.createConnection({
     if (err) throw err;
     console.log("Database Connected!");
   });
-  let filePathData = "src/data/EWords2.json"
+  let filePathData = process.env.engJson
 
   let rawData = fs.readFileSync(filePathData)
   let listWordEng = JSON.parse(rawData)
