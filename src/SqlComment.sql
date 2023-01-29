@@ -17,15 +17,21 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+
 -- Create table engWord
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `englishword` (
   `word` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `token` varchar(16) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (word)
+) ENGINE=InnoDB CHARSET=utf8;
+-- connect
+mysqlsh --mysqlx -u admin -h engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com -P 3306
+\connect admin@engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com?connect-timeout=2000
+-- add json
+util.importJson("/home/ubuntu/EWords446k.json", {schema: "engsdb", table: "englishword", tableColumn: "word"});
+util.importJson("/home/ubuntu/EWords446k.json")
+-- check
+mysqlsh -u admin -h engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com --sqlc -P 3306 -e "SHOW plugins"
+mysql -u admin -h engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com -P 3306 -p -e "select @@mysqlx_port"
 --Show all tables:
 
 Show tables;

@@ -88,6 +88,10 @@ function navSideBtn(evt: any) {
 }
 function choseWord (evt: any) {
   console.log('click: ', evt.currentTarget.innerHTML)
+  let showTag = document.getElementById('showList')
+  let inputTag = document.getElementById('autocomplete')
+  showTag.style.display = 'none'
+  inputTag.style.borderRadius = '50px'
 }
 function inputChange (ev: Event) {
   let inputValue = this.value
