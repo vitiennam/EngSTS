@@ -227,14 +227,17 @@ app.get(/^\/queryWordO=/, (req, res)=>{
             // pageSearch += `<div class="col">` + response.data + `</div>`
             }).catch(function (error) {
               // xử trí khi bị lỗi
-              console.log(error);
+              // console.log(error);
+              res.end()
+              return
               
             })
           } catch (error) {
             // console.log(error, error.message);
-            console.log(error);
+            // console.log(error);
             // res.writeHead(404)
             res.end()
+            return
           }
 
     
