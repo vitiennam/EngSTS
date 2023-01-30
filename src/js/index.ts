@@ -1,10 +1,7 @@
 
 import * as commonFunc from "./common"
 import "../css/index.css"
-import $ from 'jquery'
 
-import './jquery-ui'
-// import 'jquery-ui'
 
 var engDataSearch: ArrayLike<String>
 var userHistory: any[]
@@ -34,8 +31,9 @@ function logOut(evt: any){
     commonFunc.setCookie('username',"", 15)
     commonFunc.setCookie('email',"", 15)
     commonFunc.setCookie('token',"", 15)
-    $(".login-accountName")[0].innerHTML = `a href="login.html">Log In</a>`
-    location.reload()
+    // $(".login-accountName")[0].innerHTML = `a href="login.html">Log In</a>`
+    document.getElementById("login-accountName").innerHTML = `<a href="">Log In</a>`
+    // location.reload()
   }
 function openSearchContent(evt: any) {
     var i, tablinks, searchTabName;
@@ -86,12 +84,29 @@ function navSideBtn(evt: any) {
     document.getElementById("navSide").style.display = "flex"
   }
 }
-function choseWord (evt: any) {
-  console.log('click: ', evt.currentTarget.innerHTML)
+function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
+  const targetTag = evt.target as Element
+  console.log('click: ', targetTag.innerHTML)
   let showTag = document.getElementById('showList')
   let inputTag = document.getElementById('autocomplete')
   showTag.style.display = 'none'
   inputTag.style.borderRadius = '50px'
+
+  document.getElementById('SearchContentIframe').setAttribute('src', "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + targetTag.innerHTML)
+  // document.getElementById('divIframeSeach').style.display = 'none'
+
+  // userHistory.push(ui.item.value)
+  const urlO = 'queryWordO='+targetTag.innerHTML
+  userHistory.push(targetTag.innerHTML)
+  fetch(urlO).then((response) => response.json()).then((data) => {
+    console.log("get data from O")
+    console.log(data)
+    document.getElementById('SearchContentO').setAttribute('srcdoc', data)
+    document.getElementById('tabSeach').style.display = 'block'
+  })
+
+
+
 }
 function inputChange (ev: Event) {
   let inputValue = this.value
@@ -101,23 +116,38 @@ function inputChange (ev: Event) {
   if(inputValue){
     
     
-    showTag.style.display = 'block'
+    
     
     inputTag.style.borderRadius = '25px 25px 0 0'
-    // let showWord = ``
-    for(let i = 0; i < 10; i++){
-      // showWord += `<li class='liSearchResult' onclick=${choseWord}>${inputValue}</li>`
-      let liTag = document.createElement('li')
-      liTag.innerHTML = inputValue + i
-      liTag.className = 'liSearchResult'
-      liTag.style.fontSize = '1.5rem'
-      liTag.onclick = choseWord
+    const urlAutoQuery = 'autoQuerry='+inputValue
+    fetch(urlAutoQuery).then((response) => response.json()).then((data)=> {
+      console.log(data)
+      if(data.length == 0){
+        showTag.style.display = 'none'
+        inputTag.style.borderRadius = '50px'
+        return
+      }
+      showTag.style.display = 'block'
+      for(let i = 0; i < data.length; i++){
+        // showWord += `<li class='liSearchResult' onclick=${choseWord}>${inputValue}</li>`
+        let liTag = document.createElement('li')
+        liTag.innerHTML = data[i].word
+        liTag.className = 'liSearchResult'
+        liTag.style.fontSize = '1.5rem'
+        liTag.onclick = choseWord
+        
+        showTag.appendChild(liTag)
+        // console.log(showWord)
+        
+        
+      }
       
-      showTag.appendChild(liTag)
-      // console.log(showWord)
-      
-      
+
     }
+    )
+    console.log("after fetch")
+    // let showWord = ``
+    
     // let listLiTag = document.querySelectorAll('.liSearchResult')
     // listLiTag.forEach(liTag => liTag.onclick )
     // showTag.innerHTML = showWord
@@ -202,7 +232,8 @@ document.onreadystatechange = () => {
 
   if(username) {
     // console.log($(".login-accountName")[0])
-      $(".login-accountName")[0].innerHTML = username
+      // $(".login-accountName")[0].innerHTML = username
+      document.getElementById("login-accountName").innerHTML = username
 
       // document.getElementById("userAccount").classList.toggle("userAccountToggle")
       // document.getElementById("logOutInMenu").style.display= 'block'
@@ -244,42 +275,7 @@ document.onreadystatechange = () => {
   //     }
   //   }
   // }
-  $( "#autocompleteD" ).autocomplete({
-      source: function( request: any, response:any ) {
-              var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-              response( $.grep( engDataSearch, function( item: any ){
-                  return matcher.test( item );
-              }) );
-          },
-      select: function( event: any, ui: any ) {
-        userHistory.push(ui.item.value)
-        // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
-          // console.log(ui)
-          document.getElementById('tabSeach').style.display = 'block'
-          // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
-          // document.getElementById('SearchContentIframe').style.width = '0%'
-          // document.getElementById('SearchContentIframe').style.height = '0%'
-          // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
-          document.getElementById('SearchContentIframe').setAttribute('src', "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value)
-          document.getElementById('divIframeSeach').style.display = 'none'
-          // document.getElementById('SearchContentO').attributes.source = "https://www.oxfordlearnersdictionaries.com/definition/american_english/"+ ui.item.value+ "?q="+ ui.item.value
-          // console.log("link source " +String( document.getElementById('SearchContentO').attributes))
-          // document.getElementById('SearchContentC').attributes.source = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + ui.item.value
-  
-          $.get("queryWordO="+ui.item.value, function(data, status){
-              // alert("\nStatus: " + status);
-              // data.getElementById('ad_leftslot_container').remove
-              // document.getElementById('SearchContentO').innerHTML = data
-              // document.getElementById('SearchContentO').style.width = '100%'
-              // document.getElementById('SearchContentO').style.height = '1000px'
-              document.getElementById('SearchContentO').setAttribute('srcdoc', data)
-  
-            });
 
-  
-      }
-  }
-  )
 
   window.onbeforeunload = function () {
       localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )

@@ -10,6 +10,8 @@ const session = require('express-session');
 const mysql = require('mysql2')
 const randomToken = require('random-token')
 const https = require("https")
+
+const autoQueryCheck = /[^\/a-zA-Z=]/g
 // const configMySql = require('./configMySql.js')
 // const port = require('./configPort')
 require('dotenv').config()
@@ -75,12 +77,12 @@ app.post('/login', function(req, res){
   if (email && password) {
     //Querry email with password
     con.query('SELECT * FROM user WHERE email = ? AND password = ?', [email,password], function(err, results, fields){		
-			if (err) throw err
+			if (err) return
 			console.log(results)
 			if (results.length > 0) {
         //Add token of that user to database, If success, save it to user cookie
 				con.query('UPDATE user SET token = ? WHERE email = ?;', [userToken, email], function(err, results1, fields){
-          if (err) throw err
+          if (err) return
           // console.log(results1)
           console.log(results)
           console.log(results[0].username)
@@ -170,7 +172,43 @@ app.get('/randomWord', (req,res)=>{
   res.end(listWordEng[Math.floor(Math.random() * listWordEng.length)])
 
 })
-app.get(/queryWordO/, (req, res)=>{
+app.get(/^\/autoQuerry=/, (req, res) => {
+
+
+  console.log(req.url)
+  if(autoQueryCheck.test(req.url))
+  {
+    
+    res.end("400")
+    console.log("error1")
+    return
+  }
+  let queryText = req.url.split("=")[1]
+  if(/[^\/a-zA-Z=]/g.test(queryText)){
+    
+    res.end("400")
+    console.log("error2")
+    return
+  }
+  
+  let sqlQuery = "SELECT * FROM englishword WHERE word LIKE '"+queryText+"%' LIMIT 15;"
+  console.log(sqlQuery)
+  con.query(sqlQuery, function(err,result, fields){
+    if(err) {
+      console.log('error3')
+      
+      res.end("500")
+      return
+    }
+    // console.log(result[0])
+    res.end(JSON.stringify(result))
+
+  })
+
+
+  
+})
+app.get(/^\/queryWordO=/, (req, res)=>{
     
         console.log(req.url)
         let searchedWord = req.url.split("=")[1]
@@ -183,9 +221,9 @@ app.get(/queryWordO/, (req, res)=>{
         try {
             axios(urlSearchOxford).then((response) => {
               
-            //   console.log(html);
+              console.log("OK O");
             res.writeHead(200, {'Content-Type': 'text/html'})
-            res.end(response.data)
+            res.end(JSON.stringify(response.data))
             // pageSearch += `<div class="col">` + response.data + `</div>`
             }).catch(function (error) {
               // xử trí khi bị lỗi
@@ -194,7 +232,8 @@ app.get(/queryWordO/, (req, res)=>{
             })
           } catch (error) {
             // console.log(error, error.message);
-            res.writeHead(404)
+            console.log(error);
+            // res.writeHead(404)
             res.end()
           }
 

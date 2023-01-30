@@ -32,6 +32,14 @@ util.importJson("/home/ubuntu/EWords446k.json")
 -- check
 mysqlsh -u admin -h engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com --sqlc -P 3306 -e "SHOW plugins"
 mysql -u admin -h engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com -P 3306 -p -e "select @@mysqlx_port"
+-- QUERRy
+SELECT word
+FROM englishword
+WHERE word
+LIMIT number;
+
+SELECT * FROM englishword WHERE REGEXP_LIKE(word, '^b') LIMIT 10;
+SELECT * FROM englishword WHERE word LIKE 'b%' LIMIT 10;
 --Show all tables:
 
 Show tables;

@@ -36,7 +36,6 @@ const con = mysql.createConnection({
 
       if(i == listWordEng.length - 1){
         console.log("Done")
-          break
       }
   }
   

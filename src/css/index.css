@@ -147,9 +147,13 @@ li#hamburger {
 }
 .showList li {
     padding: 10px 0px 10px 10%;
-    border-bottom: 1px solid var(--color-2) ;
+    border-bottom: 2px solid var(--color-3) ;
     text-decoration: none;
     color: var(--color-1);
+}
+.showList li:hover {
+    background-color: var(--color-2);
+    color: var(--color-0);
 }
 .activeLi {
     background-color: var(--color-2);
@@ -238,12 +242,13 @@ iframe, #divIframeSeach, #divIframeSeachO {
     outline: none;
     border: none;
     padding-top: 10px;
+    background-color: var(--color-0);
     /* display: none; */
 }
 
 .active {
-    background-color: var(--color-0);
-    color: var(--color-1);
+    background-color: var(--color-0) !important;
+    color: var(--color-1) !important;
 }
 @media screen and (max-width: 700px) {
 
