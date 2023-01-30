@@ -16,17 +16,17 @@ if(localStorage.userHistoryWord) {
 } else {
   userHistory = []
 }
-if(localStorage.engDataSearch) {
-    engDataSearch = JSON.parse(localStorage.engDataSearch) 
-  } else {
-    $.get("engDataSearch", function(data, status){
-        // alert("Data: "  + "\nStatus: " + status);
+// if(localStorage.engDataSearch) {
+//     engDataSearch = JSON.parse(localStorage.engDataSearch) 
+//   } else {
+//     $.get("engDataSearch", function(data, status){
+//         // alert("Data: "  + "\nStatus: " + status);
         
-        engDataSearch = JSON.parse(data)
-        localStorage.setItem('engDataSearch', JSON.stringify(engDataSearch) )
+//         engDataSearch = JSON.parse(data)
+//         localStorage.setItem('engDataSearch', JSON.stringify(engDataSearch) )
     
-      });
-  }
+//       });
+//   }
 function logOut(evt: any){
     commonFunc.setCookie('username',"", 15)
     commonFunc.setCookie('email',"", 15)
