@@ -234,9 +234,12 @@ li#hamburger {
     height: 100%;
 }
 iframe, #divIframeSeach, #divIframeSeachO {
-    /* display: none; */
+    
     width: 100%;
     height: 100%;
+}
+#divIframeSeach, #divIframeSeachO {
+    display: none;
 }
 .searchContent iframe {
     outline: none;
@@ -245,6 +248,7 @@ iframe, #divIframeSeach, #divIframeSeachO {
     background-color: var(--color-0);
     /* display: none; */
 }
+
 
 .active {
     background-color: var(--color-0) !important;

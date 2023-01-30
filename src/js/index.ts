@@ -103,6 +103,7 @@ function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
     console.log(data)
     document.getElementById('SearchContentO').setAttribute('srcdoc', data)
     document.getElementById('tabSeach').style.display = 'block'
+    document.getElementById('divIframeSeachO').style.display = 'block'
   })
 
 
