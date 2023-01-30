@@ -237,6 +237,9 @@ document.onreadystatechange = () => {
 
       // document.getElementById("userAccount").classList.toggle("userAccountToggle")
       // document.getElementById("logOutInMenu").style.display= 'block'
+  } else {
+    // <a href="">Log In</a>
+    document.getElementById("login-accountName").innerHTML = `<a href="">Log In</a>`
   }
 
   document.getElementById("tablinksO").onclick = openSearchContent
