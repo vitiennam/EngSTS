@@ -196,6 +196,7 @@ app.get(/^\/autoQuerry=/, (req, res) => {
   con.query(sqlQuery, function(err,result, fields){
     if(err) {
       console.log('error3')
+      console.log(err)
       
       res.end("500")
       return
