@@ -33,8 +33,15 @@ let pluginsSetting = [
     template: './src/login.html',
     chunks: ['login']
   }),
+  new HtmlWebpackPlugin({
+    title: 'register',
+    filename: 'register.html',
+    template: './src/register.html',
+    chunks: ['register']
+  }),
   
 ]
+
 let exportSetting = {
   mode: process.env.NODE_ENV,
 
@@ -43,6 +50,7 @@ let exportSetting = {
     history: "./src/js/history.ts",
     flashCard: "./src/js/flashCard.ts",
     login:"./src/js/login.ts",
+    register:"./src/js/register.ts",
     // main: ['webpack-hot-middleware/client', './src/main.js'],
 
     // index: ['webpack-hot-middleware/client',  "./src/js/index.ts"],
@@ -96,10 +104,12 @@ let exportSetting = {
   }
 }
 if(devMode){
-  pluginsSetting.push(new MiniCssExtractPlugin())
+  exportSetting.plugins.push(new MiniCssExtractPlugin())
+
  
 } else {
   exportSetting.devtool = 'inline-source-map'
 }
+// console.log(exportSetting.plugins)
 
 module.exports = exportSetting

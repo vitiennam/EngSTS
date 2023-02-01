@@ -112,8 +112,8 @@ app.post(/^\/login/, function(req, res){
         res.cookie('token', userToken, options)
         res.cookie('username', results[0].username, options)
         //go to home page
-        res.redirect('/')
-        res.end()
+        // res.redirect('/')
+        res.end(JSON.stringify({content: "done"}))
         })
 				
 				
@@ -136,7 +136,7 @@ app.post(/^\/login/, function(req, res){
   // res.end()
 })
 
-app.post('/signup', function(req, res){
+app.post(/^\/signup/, function(req, res){
   console.log(req.body)
   let email = req.body.useremail;
 	let password = req.body.userpassword;
@@ -149,12 +149,12 @@ app.post('/signup', function(req, res){
     con.query('SELECT * FROM user WHERE email = ?', [email], function(err, results, fields){		
       if (err) {
         res.end()
-        throw err
+        return
       }
       if (results.length === 0) {
         con.query(sql, [username, password, email, userToken], function(err, results, fields){
             
-          if (err) throw err;
+          if (err) {return}
           console.log("1 record inserted")
           // res.write(userToken)
           // res.json({username:username, token:userToken})
@@ -167,20 +167,20 @@ app.post('/signup', function(req, res){
           res.cookie('email', email, options)
           res.cookie('token', userToken, options)
           res.cookie('username', username, options)
-          res.redirect('/')
-          res.end()
+          // res.redirect('/')
+          res.end(JSON.stringify({content: "done"}))
         })
       }
       else {
-        res.end('account existed')
+        res.end(JSON.stringify({content: "account existed"}))
       }
       
 
-  })
+    })
 
   } else {
-    res.send('Incorrect Email and/or Password!')
-    res.end()
+    
+    res.end(JSON.stringify({content: "Missing Input"}))
   }
 
 

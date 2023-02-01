@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>Sign Up</title>
     <!-- <link rel="stylesheet" href="./css/login.css"> -->
 </head>
 <body>
@@ -26,20 +26,28 @@
             <div class="containerLogin">
             
                 <div class="formLogin" id="formLogin">
-                    <h1 class="h1">Log In</h1>
+                    <h1 class="h1">SIGN UP</h1>
+                    <div class="inputDiv">
+                        <label for="">User Name</label>
+                        <input class="inputForm" type="email" name="username" id="inputUserName" placeholder="Email Address" required>
+        
+                    </div>
                     <div class="inputDiv">
                         <label for="">Email</label>
-                        <input class="inputForm" type="email" name="useremail" id="input1" placeholder="Email Address" required>
+                        <input class="inputForm" type="email" name="useremail" id="inputEmail" placeholder="Email Address" required>
         
                     </div>
                     <div class="inputDiv">
                         <label for="">Password</label>
-                        <input class="inputForm" type="password" name="userpassword" id="input2" placeholder="Password" required>
-        
+                        <input class="inputForm" type="password" name="userpassword" id="inputPassword" placeholder="Password" required>
+                    </div>
+                    <div class="inputDiv">
+                        <label for="">Confirm Password</label>
+                        <input class="inputForm" type="password" name="userconfirmpassword" id="inputConfirmPassword" placeholder="Password" required>
                     </div>
                     <div class="btnZone">
-                        <button class="btnSubmit" id="btnSubmit">Log In</button>
-                        <a href="register.html" class="registerLink"> SIGN UP</a>
+                        <button class="btnSubmit" id="btnSubmit">SIGN UP</button>
+                        <a href="login.html" class="LoginLink">LOG IN</a>
                     </div>
                 </div>
                 

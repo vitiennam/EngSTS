@@ -32,7 +32,7 @@ function logOut(evt: any){
     commonFunc.setCookie('email',"", 15)
     commonFunc.setCookie('token',"", 15)
     // $(".login-accountName")[0].innerHTML = `a href="login.html">Log In</a>`
-    document.getElementById("login-accountName").innerHTML = `<a href="">Log In</a>`
+    document.getElementById("login-accountName").innerHTML = `<a href="login.html">Log In</a>`
     // location.reload()
   }
 function openSearchContent(evt: any) {

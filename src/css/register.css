@@ -135,8 +135,7 @@ li#hamburger {
     justify-content: space-between;
 
 }
-
-.registerLink {
+.LoginLink {
     width: 30%;
     margin-top: 5%;
     height: 30px;
@@ -149,7 +148,7 @@ li#hamburger {
     text-align: center;
 
 }
-.registerLink:hover {
+.LoginLink:hover {
     background-color: var(--color-2);
     color: var(--color-0);
 }
