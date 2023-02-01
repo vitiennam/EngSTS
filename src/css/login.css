@@ -1,6 +1,209 @@
-input {
-    display: block;
+@import "color.css";
+@import "font.css";
+@import "size.css";
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-family);
 }
-form {
-    align: center;
+body {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+
+
+}
+.container {
+    max-width: 1200px;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+}
+/* NAV bar */
+.navLinks, .account, .showList li {
+    list-style: none;
+}
+a, li {
+    text-decoration: none;
+    color: var(--color-1);
+}
+.navTitle {
+    font-size: 2rem;;
+}
+.navBox {
+    /* position: fixed; */
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-2);
+
+}
+.navBar, .navLinks {
+    display: flex;
+
+}
+.navBar {
+    max-width: 1200px;
+    justify-content: space-between;
+    padding: 20px 50px;
+    
+}
+.navLinks {
+    column-gap: 25px;
+}
+.navLinks li:hover {
+    border-bottom: 3px solid var(--color-2);
+    transition: all 0.2s ease;
+}
+
+.navli, .account {
+    display: flex;
+    align-items: center;
+}
+.navli a{
+    text-align: center;
+}
+.account {
+    column-gap: 20px;
+}
+li#hamburger {
+    height: 40px;
+    width: 40px;
+    background-image: url('../../svg/hamburger-menu-svgrepo-com.svg');
+    background-size: contain;
+    background-color: var(--color-2);
+    border-radius: 5px;
+}
+
+/* End Nav Bar */
+.containerLoginAndNavside {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.containerLogin {
+    max-width: 1200px;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formLogin {
+    width: 50%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border: 5px solid var(--color-1);
+    border-radius: 50px;
+    box-shadow: 5px var(--color-1);
+    color: var(--color-1);
+}
+.h1 {
+    text-align: center;
+    color: var(--color-1);
+}
+.inputDiv {
+    padding-top: 10px;
+}
+
+.inputForm {
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    outline: none;
+    border: 2px solid var(--color-2);
+    border-radius: 5px;
+    padding-left: 5px;
+    font-size: 1.2em;
+    color: var(--color-1);
+}
+.inputForm:focus {
+    border: 2px solid var(--color-2)
+}
+.inputFormAler {
+    border: 2px solid var(--color-aler);
+}
+.btnSubmit {
+    width: 30%;
+    margin-top: 5%;
+    height: 30px;
+    border: 2px solid var(--color-2);
+    background-color: var(--color-2);
+    border-radius: 5px;
+    font-size: 1em;
+    color: var(--color-0);
+    font-weight: 600;
+}
+.btnSubmit:active {
+    background-color: var(--color-1);
+}
+/* nav side */
+.navSide {
+    width: 0%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    
+    background-color: var(--color-2);
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease;
+
+
+}
+.navSideToggle {
+    width: 40%;
+}
+.navLinksSide li, .navSide ul li {
+    margin-top: 10px;
+    margin-left: 10px;
+    column-gap: 10px;
+    
+}
+.navLinksSide li a, .navSide ul li {
+    color: var(--color-0);
+}
+.bottomNav li {
+    padding-bottom: 30%;
+}
+.bottomNav li:hover {
+    cursor: pointer;
+}
+.navLinksSide li:hover {
+    margin-left: 20px;
+    transition: all 0.15s ease;
+} 
+
+.navLinksSide .navli svg, .navSide ul li svg {
+
+    width: 25px;
+    height: 25px;
+}
+
+@media screen and (max-width: 700px) {
+
+    .navBar {
+        padding: 5px;
+    }
+    .navSide {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        transition: all 0.5s ease;
+    }
+    .navSideToggle {
+        width: 50%;
+    }
+    .navLinks {
+        display: none;
+    }
+
 }

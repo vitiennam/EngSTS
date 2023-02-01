@@ -26,18 +26,27 @@ const logOn = true
 let filePathData = "src/data/EWords2.json"
 let rawData = fs.readFileSync(filePathData)
 let listWordEng = JSON.parse(rawData)
-const con = mysql.createConnection({
+// const con = mysql.createConnection({
+//   host     : process.env.host_MYSQL,
+//   user     : process.env.user_MYSQL,
+//   password : process.env.password_MYSQL,
+//   database : process.env.database_MYSQL
+// })
+const con = mysql.createPool({
   host     : process.env.host_MYSQL,
   user     : process.env.user_MYSQL,
   password : process.env.password_MYSQL,
-  database : process.env.database_MYSQL
-})
+  database : process.env.database_MYSQL,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
 //-----------
 
-con.connect(function(err) {
-  if (err) throw err;
-  if(logOn) console.log("Database Connected!");
-});
+// con.connect(function(err) {
+//   if (err) throw err;
+//   if(logOn) console.log("Database Connected!");
+// });
 
 //Use Middleware of Webpack
 
@@ -63,12 +72,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/engDataSearch', (req, res)=>{
+  
     res.end(JSON.stringify(listWordEng))
 } )
-app.post('/login', function(req, res){
-  console.log(req.body)
-  let email = req.body.useremail
-	let password = req.body.userpassword
+app.post(/^\/login/, function(req, res){
+  console.log(req)
+  // const bodyParse = req.body.json()
+  const email = req.body.useremail
+	const password = req.body.userpassword
   const userToken = randomToken(16)
 
   let sql = 'SELECT * FROM user WHERE email = '+email+' AND password = '+password
@@ -96,24 +107,31 @@ app.post('/login', function(req, res){
             maxAge: 24 * 60 * 60 * 1000 * exdays, 
         }
         //add Login infor in cookie of Client
-          res.cookie('email', email, options)
-          res.cookie('token', userToken, options)
-          res.cookie('username', results[0].username, options)
-          //go to home page
-          res.redirect('/')
-          res.end()
+        
+        res.cookie('email', email, options)
+        res.cookie('token', userToken, options)
+        res.cookie('username', results[0].username, options)
+        //go to home page
+        res.redirect('/')
+        res.end()
         })
 				
 				
 			} else {
-				res.send('Incorrect Email and/or Password!')
-        res.end()
+        // res.status(200)
+        
+      
+        
+				// res.status(404)
+        res.end(JSON.stringify({content: "Wrong username or password"}))
 			}			
 			
     })
   } else {
-    res.send('Incorrect Email and/or Password!')
-    res.end()
+    // res.status(200)
+
+    res.end(JSON.stringify({content: "Wrong username or password"}))
+
   }
   // res.end()
 })
