@@ -16,7 +16,7 @@ function btnSubmit(this: GlobalEventHandlers ,evt:MouseEvent){
         userpassword : '' 
     }
 
-    if(inputTags[0] && inputTags[1]){
+    if(inputTags[0].value && inputTags[1].value){
         submitValue.useremail = inputTags[0].value
         submitValue.userpassword = inputTags[1].value
     } else {
