@@ -23,9 +23,9 @@ if(process.env.MODE_SSL === '1'){
 }
 const logOn = true
 //-----------
-let filePathData = "src/data/EWords2.json"
-let rawData = fs.readFileSync(filePathData)
-let listWordEng = JSON.parse(rawData)
+// let filePathData = "src/data/EWords2.json"
+// let rawData = fs.readFileSync(filePathData)
+// let listWordEng = JSON.parse(rawData)
 // const con = mysql.createConnection({
 //   host     : process.env.host_MYSQL,
 //   user     : process.env.user_MYSQL,
@@ -186,8 +186,21 @@ app.post(/^\/signup/, function(req, res){
 
   
 })
-app.get('/randomWord', (req,res)=>{
-  res.end(listWordEng[Math.floor(Math.random() * listWordEng.length)])
+app.post(/^\/randomWord/, (req,res)=>{
+  // res.end(listWordEng[Math.floor(Math.random() * listWordEng.length)])
+  let sqlQ = 'SELECT * FROM englishword5k ORDER BY RAND() LIMIT 10;'
+  console.log(sqlQ)
+  con.query(sqlQ, function(err,result,fields){
+    if(err) {
+      console.log('error', err)
+      res.end()
+      return
+    }
+    // console.log(result)
+    if(result.length == 10){
+      res.end(JSON.stringify(result))
+    }
+  })
 
 })
 app.get(/^\/autoQuerry=/, (req, res) => {

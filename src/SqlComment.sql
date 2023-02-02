@@ -45,6 +45,8 @@ LIMIT number;
 
 SELECT * FROM englishword WHERE REGEXP_LIKE(word, '^b') LIMIT 10;
 SELECT * FROM englishword WHERE word LIKE 'b%' LIMIT 10;
+
+SELECT * FROM englishword5k ORDER BY RAND() LIMIT 10;
 --Show all tables:
 
 Show tables;
