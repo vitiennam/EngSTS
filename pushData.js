@@ -20,7 +20,8 @@ const con = mysql.createConnection({
 
   let rawData = fs.readFileSync(filePathData)
   let listWordEng = JSON.parse(rawData)
-  let sql = 'INSERT INTO englishword (word) VALUES (?);'
+  let sql = 'INSERT INTO '+process.env.table+' (word) VALUES (?);'
+  console.log(sql)
   for(let i = 0; i < listWordEng.length; i++){
       if(i % 1000 == 0){
         console.log(listWordEng[i])

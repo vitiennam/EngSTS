@@ -1,0 +1,200 @@
+@import "color.css";
+@import "font.css";
+@import "size.css";
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-family);
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+}
+.container {
+    max-width: 1200px;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+}
+/* NAV bar */
+.navLinks, .account, .showList li {
+    list-style: none;
+}
+a, li {
+    text-decoration: none;
+    color: var(--color-1);
+}
+.navTitle {
+    font-size: 2rem;;
+}
+.navBox {
+    /* position: fixed; */
+    width: 100%;
+  
+    font-weight: 600;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-2);
+
+}
+.navBar, .navLinks {
+    display: flex;
+
+}
+.navBar {
+    max-width: 1200px;
+    justify-content: space-between;
+    padding: 20px 50px;
+    
+}
+.navLinks {
+    column-gap: 25px;
+}
+.navLinks li:hover {
+    border-bottom: 3px solid var(--color-2);
+    transition: all 0.2s ease;
+}
+
+.navli, .account {
+    display: flex;
+    align-items: center;
+}
+.navli a{
+    text-align: center;
+}
+.account {
+    column-gap: 20px;
+}
+li#hamburger {
+    height: 40px;
+    width: 40px;
+    background-image: url('../../svg/hamburger-menu-svgrepo-com.svg');
+    background-size: contain;
+    background-color: var(--color-2);
+    border-radius: 5px;
+}
+/* end nav */
+.containerFlashCardAndNavside {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flipCard {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; 
+    
+}
+.containerFlashCard {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+
+}
+/* .containerFlashCard:hover {
+    transform: rotateY(180deg);
+} */
+.btnText, .contentMeaning {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    border: 5px solid var(--color-1);
+    border-radius: 15px;
+    background-color: var(--color-background);
+
+
+}
+.btnText {
+    display: flex;
+    justify-self: center;
+
+}
+.contentMeaning {
+    /* transform: rotateY(180deg); */
+    
+}
+.clickCardNotify{
+    position: relative;
+    top:20%;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--color-1);
+
+}
+.rotateToggle {
+    transform: rotateY(180deg);
+}
+/* nav side */
+.navSide {
+    width: 0%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    
+    background-color: var(--color-2);
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease;
+
+
+}
+.navSideToggle {
+    width: 40%;
+}
+.navLinksSide li, .navSide ul li {
+    margin-top: 10px;
+    margin-left: 10px;
+    column-gap: 10px;
+    
+}
+.navLinksSide li a, .navSide ul li {
+    color: var(--color-0);
+}
+.bottomNav li {
+    padding-bottom: 30%;
+}
+.bottomNav li:hover {
+    cursor: pointer;
+}
+.navLinksSide li:hover {
+    margin-left: 20px;
+    transition: all 0.15s ease;
+} 
+
+.navLinksSide .navli svg, .navSide ul li svg {
+
+    width: 25px;
+    height: 25px;
+}
+
+@media screen and (max-width: 700px) {
+
+    .navBar {
+        padding: 5px;
+    }
+    .navSide {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        transition: all 0.5s ease;
+    }
+    .navSideToggle {
+        width: 50%;
+    }
+    .navLinks {
+        display: none;
+    }
+
+}

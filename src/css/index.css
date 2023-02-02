@@ -14,10 +14,13 @@ html {
     height: 100vh;
 }
 body {
+
     height: 100%;
+    overflow-x: hidden;
     background-color: var(--color-1);
     display: flex;
     justify-content: center;
+
     
 }
 .container {
@@ -166,7 +169,7 @@ li#hamburger {
     
     background-color: var(--color-0);
     /* display: none; */
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.5s ease;
@@ -184,6 +187,7 @@ li#hamburger {
 }
 .navLinksSide li a, .navSide ul li {
     color: var(--color-1);
+    transition: all 0.5s ease;
 }
 .bottomNav li {
     padding-bottom: 30%;
@@ -270,7 +274,7 @@ iframe, #divIframeSeach, #divIframeSeachO {
         position: absolute;
         right: 0;
         height: 100%;
-        transition: all 0.1s ease;
+        transition: all 0.5s ease;
     }
     .navSideToggle {
         width: 50%;
