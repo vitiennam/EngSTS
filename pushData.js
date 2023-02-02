@@ -31,7 +31,11 @@ const con = mysql.createConnection({
         if (err) {
             console.log(err)
             return}
-        console.log("hi", i)
+        // console.log("hi", i)
+        if(i % 1000 == 0){
+          console.log(listWordEng[i])
+  
+        }
       })
 
 

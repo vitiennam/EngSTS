@@ -23,6 +23,11 @@ CREATE TABLE IF NOT EXISTS `englishword` (
   `word` varchar(50) NOT NULL,
   PRIMARY KEY (word)
 ) ENGINE=InnoDB CHARSET=utf8;
+-- Create table english5k
+CREATE TABLE IF NOT EXISTS `englishword5k` (
+  `word` varchar(50) NOT NULL,
+  PRIMARY KEY (word)
+) ENGINE=InnoDB CHARSET=utf8;
 -- connect
 mysqlsh --mysqlx -u admin -h engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com -P 3306
 \connect admin@engsdb.ct3atq1l9uwz.ap-northeast-1.rds.amazonaws.com?connect-timeout=2000
