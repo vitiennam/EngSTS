@@ -270,8 +270,10 @@ iframe, #divIframeSeach, #divIframeSeachO {
         position: absolute;
         right: 0;
         height: 100%;
-        width: 50%;
         transition: all 0.1s ease;
+    }
+    .navSideToggle {
+        width: 50%;
     }
     .navLinks {
         display: none;

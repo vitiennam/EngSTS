@@ -6,7 +6,7 @@ const axios = require('axios')
 const app = express()
 const config = require('./webpack.config')
 const compiler = webpack(config)
-const session = require('express-session');
+// const session = require('express-session');
 const mysql = require('mysql2')
 const randomToken = require('random-token')
 const https = require("https")
@@ -63,11 +63,11 @@ app.use(
 //   heartbeat: 2000,
 //   reload: true
 // }))
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
+// app.use(session({
+// 	secret: 'secret',
+// 	resave: true,
+// 	saveUninitialized: true
+// }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
