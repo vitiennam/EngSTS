@@ -188,8 +188,8 @@ li#hamburger {
 }
 .navLinksSide li a, .navSide ul li {
     color: var(--color-1);
-    transition: all 0.5s ease;
 }
+/* .navSide ul li:nth-child(1){} */
 .bottomNav li {
     padding-bottom: 30%;
 }
