@@ -75,14 +75,6 @@ function openSearchContent(evt: any) {
 }
 function navSideBtn(evt: any) {
   document.getElementById("navSide").classList.toggle('navSideToggle')
-  // document.getElementById("dropMenuContent").classList.toggle("show")
-  // if(document.getElementById("navSide").style.display == "flex")
-  // {
-  //   document.getElementById("navSide").style.display = "none"
-  // }
-  // else {
-  //   document.getElementById("navSide").style.display = "flex"
-  // }
 }
 function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
   const targetTag = evt.target as Element

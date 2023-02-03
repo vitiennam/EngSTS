@@ -1,52 +1,43 @@
-import '../css/index.css'
-$(function(){
-  var searchWord
-  var userHistory: any[]
-  if(localStorage.userHistoryWord) {
-    userHistory = JSON.parse(localStorage.userHistoryWord) 
-  } else {
-    userHistory = []
-  }
+import { electron } from 'webpack'
+import '../css/history.css'
+import * as commonFunc from "./common"
 
-  var email = getCookie('email')
-  var username = getCookie('username')
-  var token = getCookie('token')
+var userHistory: any[]
+if(localStorage.userHistoryWord) {
+  userHistory = JSON.parse(localStorage.userHistoryWord) 
+} else {
+  userHistory = []
+}
+function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
+  const targetTag = evt.target as Element
+  console.log('click: ', targetTag.innerHTML)
+  // let showTag = document.getElementById('showList')
+  // let inputTag = document.getElementById('autocomplete')
+  // showTag.style.display = 'none'
+  // inputTag.style.borderRadius = '50px'
 
-  console.log('username: ', username)
-  if(username){
-    document.getElementById('loginA').innerHTML = 'Hi ' + username
-    document.getElementById('loginA').setAttribute('href', '#')
-  }
+  document.getElementById('SearchContentIframe').setAttribute('src', "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + targetTag.innerHTML)
+  // document.getElementById('divIframeSeach').style.display = 'none'
 
-  function setCookie(cname: string, cvalue: string | string[], exdays: number) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-  
-  function getCookie(cname: string) {
-    let name = cname + "=";
-    let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length).replace('%20', ' ').replace('%40', ' ');
-      }
-    }
-    return "";
-  }
+  // userHistory.push(ui.item.value)
+  const urlO = 'queryWordO='+targetTag.innerHTML
+  // userHistory.push(targetTag.innerHTML)
+  fetch(urlO).then((response) => response.json()).then((data) => {
+    console.log("get data from O")
+    console.log(data)
+    document.getElementById('SearchContentO').setAttribute('srcdoc', data)
+    document.getElementById('tabSeach').style.display = 'block'
+    document.getElementById('divIframeSeachO').style.display = 'block'
+  })
 
-userHistory.forEach(element => {
-    $("#listHistory").append("<button type=\"button\" class=\"list-group-item list-group-item-action buttonHisClass\" id=\"buttonHis\">"+element+"</button>")
-});
-function openSearchContent(evt: any) {
+
+
+}
+function openSearchContent(this: GlobalEventHandlers,evt: MouseEvent) {
   var i, tablinks, searchTabName;
+  let btnTarget = evt.target as HTMLButtonElement | null
   
-  searchTabName = evt.currentTarget.innerHTML
+  searchTabName = btnTarget.innerHTML
   console.log("searchTabName " + searchTabName)
   switch(searchTabName) {
       case 'Oxford':
@@ -55,74 +46,83 @@ function openSearchContent(evt: any) {
           // document.getElementById('SearchContentIframe').style.width = '0px'
           document.getElementById('divIframeSeachO').style.display = 'block'
           document.getElementById('divIframeSeach').style.display = 'none'
-          document.getElementById('SearchContentO').style.width = '100%'
-          document.getElementById('SearchContentO').style.height = '1000px'
+          // document.getElementById('SearchContentO').style.width = '100%'
+          // document.getElementById('SearchContentO').style.height = '1000px'
           console.log("SearchContentO display " + document.getElementById('SearchContentO').style.display)
           break
       case 'Cambridge':
           // document.getElementById('SearchContentIframe').src = linkCam
           document.getElementById('divIframeSeachO').style.display = 'none'
           document.getElementById('divIframeSeach').style.display = 'block'
-          document.getElementById('SearchContentIframe').style.width = '100%'
-          document.getElementById('SearchContentIframe').style.height = '1000px'
-          console.log("SearchContentO display " + document.getElementById('SearchContentO').style.display)
+          // document.getElementById('SearchContentIframe').style.width = '100%'
+          // document.getElementById('SearchContentIframe').style.height = '1000px'
+          console.log("SearchContent display " + document.getElementById('SearchContentO').style.display)
           break
-          
-          
+      
+      
 
   }
-  // tabcontent = document.getElementsByClassName("iframe");
-  // for (i = 0; i < tabcontent.length; i++) {
-  //     tabcontent.style.display = "none";
-  // }
-  
-  tablinks = document.getElementsByClassName("tablinks");
+
+  tablinks = document.getElementsByClassName("btnContent");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
-  
+
   // document.getElementById(searchTabName).style.display = "block";
-  evt.currentTarget.className += " active";
-  
+  btnTarget.className += " active";
+
 }
-document.getElementById("tablinksO").onclick = openSearchContent
-document.getElementById("tablinksC").onclick = openSearchContent
+if(userHistory.length >0){
+  let item = ``
+  userHistory.reverse().forEach(element => {
+    item += `<button type="button" class="buttonHisClass" id="buttonHis">${element}</button>`
+    document.getElementById("historyUser").innerHTML = item
+
+  })
+  let historyUserTag = document.getElementById('historyUser')
+  let btnListTag = historyUserTag.getElementsByTagName('button')
+  for(let i = 0; i < btnListTag.length; i++) {
+    btnListTag[i].onclick = choseWord
+  }
+
+}
+function navSideBtn(evt: any) {
+  document.getElementById("navSide").classList.toggle('navSideToggle')
+}
+function logOut(evt: any){
+  commonFunc.setCookie('username',"", 15)
+  commonFunc.setCookie('email',"", 15)
+  commonFunc.setCookie('token',"", 15)
+  // $(".login-accountName")[0].innerHTML = `a href="login.html">Log In</a>`
+  document.getElementById("login-accountName").innerHTML = `<a href="login.html">Log In</a>`
+  // location.reload()
+}
 
 
-$(".buttonHisClass").click(function (e) { 
-    searchWord = jQuery(this).text();
 
-    e.preventDefault();
-    var btnHis = document.getElementsByClassName("buttonHisClass");
-    for (var i = 0; i < btnHis.length; i++) {
-        btnHis[i].className = btnHis[i].className + " disabled";
-      }
 
-    document.getElementById('tabSeach').style.display = 'block'
-    // document.getElementById('SearchContentIframe').src = "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + searchWord
-    document.getElementById('SearchContentIframe').setAttribute('src', "https://dictionary.cambridge.org/dictionary/english-vietnamese/" + searchWord)
+document.onreadystatechange = () => {
+  var email = commonFunc.getCookie('email')
+  var username = commonFunc.getCookie('username')
+  var token = commonFunc.getCookie('token')
+  if(username) {
+    // console.log($(".login-accountName")[0])
+      // $(".login-accountName")[0].innerHTML = username
+      document.getElementById("login-accountName").innerHTML = username
 
-    document.getElementById('divIframeSeach').style.display = 'none'
+      // document.getElementById("userAccount").classList.toggle("userAccountToggle")
+      // document.getElementById("logOutInMenu").style.display= 'block'
+  } else {
+    // <a href="">Log In</a>
+    document.getElementById("login-accountName").innerHTML = `<a href="login.html">Log In</a>`
+  }
+  document.getElementById("hamburger").onclick = navSideBtn
 
-    $.get("queryWordO="+searchWord, function(datahtml, statushtml){
-        // alert("\nStatus: " + statushtml);
-        // data.getElementById('ad_leftslot_container').remove
-        if(statushtml == 'success'){
-            // document.getElementById('SearchContentO').innerHTML = datahtml
-            document.getElementById('SearchContentO').style.width = '100%'
-              document.getElementById('SearchContentO').style.height = '1000px'
-              document.getElementById('SearchContentO').setAttribute('srcdoc', datahtml)
-            // document.getElementById('ad_leftslot_container').style.display = 'none'
-            var btnHis = document.getElementsByClassName("buttonHisClass");
-            for (var i = 0; i < btnHis.length; i++) {
-                btnHis[i].className = btnHis[i].className.replace(" disabled", "");
-              }
-        }
-        
-      })
-    
-});
-})
+  document.getElementById("logOut").onclick = logOut
+  document.getElementById("tablinksO").onclick = openSearchContent
+  document.getElementById("tablinksC").onclick = openSearchContent
+
+}
 
 
 

@@ -1,0 +1,256 @@
+@import "color.css";
+@import "font.css";
+@import "size.css";
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-family);
+}
+html {
+    /* overflow: hidden; */
+    /* overflow: hidden; */
+}
+body {
+    width: 100%;
+    height: 100vh;
+    /* max-height: 100vh; */
+    /* overflow: hidden; */
+}
+.container {
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    
+    margin: auto;
+}
+/* NAV bar */
+.navLinks, .account, .showList li {
+    list-style: none;
+}
+a, li {
+    text-decoration: none;
+    color: var(--color-1);
+}
+.navTitle {
+    font-size: 2rem;;
+}
+.navBox {
+    /* position: fixed; */
+    width: 100%;
+    height: 10%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-2);
+
+}
+.navBar, .navLinks {
+    display: flex;
+
+}
+.navBar {
+    max-width: 1200px;
+    justify-content: space-between;
+    padding: 20px 50px;
+    
+}
+.navLinks {
+    column-gap: 25px;
+}
+.navLinks li:hover {
+    border-bottom: 3px solid var(--color-2);
+    transition: all 0.2s ease;
+}
+
+.navli, .account {
+    display: flex;
+    align-items: center;
+}
+.navli a{
+    text-align: center;
+}
+.account {
+    column-gap: 20px;
+}
+li#hamburger {
+    height: 40px;
+    width: 40px;
+    background-image: url('../../svg/hamburger-menu-svgrepo-com.svg');
+    background-size: contain;
+    background-color: var(--color-2);
+    border-radius: 5px;
+}
+/* end nav */
+
+/* nav side */
+.navSide {
+    width: 0%;
+    height: 100%;
+    font-weight: 600;
+    font-size: 1.3rem;
+    
+    background-color: var(--color-2);
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease;
+
+
+}
+.navSideToggle {
+    width: 40%;
+}
+.navLinksSide li, .navSide ul li {
+    margin-top: 10px;
+    margin-left: 10px;
+    column-gap: 10px;
+    
+}
+.navLinksSide li a, .navSide ul li {
+    color: var(--color-0);
+}
+.bottomNav li {
+    padding-bottom: 30%;
+}
+.bottomNav li:hover {
+    cursor: pointer;
+}
+.navLinksSide li:hover {
+    margin-left: 20px;
+    transition: all 0.15s ease;
+} 
+
+.navLinksSide .navli svg, .navSide ul li svg {
+
+    width: 25px;
+    height: 25px;
+}
+/* content */
+.searchContent {
+    width: 80%;
+    height: 100%;
+    padding-top: 5%;
+}
+.choiceDicBtn {
+    position: relative;
+    display: flex;
+    column-gap: 5px;
+    padding: 5px;
+    
+    
+}
+.choiceDicBtn .btnContent {
+    outline: none;
+    width: 100%;
+    border: 2px solid var(--color-1);
+    background-color: var(--color-0);
+    color: var(--color-1);
+    padding: 5px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: all 0.1s ease;
+    
+}
+
+.choiceDicBtn .btnContent:hover {
+    background-color: var(--color-1);
+    color: var(--color-0);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.active {
+    background-color: var(--color-1) !important;
+    color: var(--color-0) !important;
+}
+.searchBoxAndContent {
+    width: 100%;
+    height: 100%;
+}
+.searchContent {
+    display: none;
+    height: 100%;
+}
+iframe, #divIframeSeach, #divIframeSeachO {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+#divIframeSeach, #divIframeSeachO {
+    padding: 5px;
+    
+    display: none;
+}
+.searchContent iframe {
+    outline: none;
+    border: none;
+    padding-top: 10px;
+    background-color: var(--color-0);
+    /* display: none; */
+}
+
+.iframeActive {
+    display: block;
+}
+/* History */
+.containerHistoryAndNavside {
+    height: 90%;
+    width: 100%;
+}
+.HisAndContent {
+    height: 100%;
+    width: 100%;
+}
+.containerHistoryAndNavside {
+    display: flex;
+}
+.HisAndContent {
+   position: relative;
+   display: flex;
+}
+.historyUser {
+    width: 20%;
+    height: 100%;
+    overflow: scroll;
+    padding: 5px;
+    word-wrap: break-word;
+}
+.buttonHisClass {
+    width: 100%;
+    height: 47px;
+    background-color: var(--color-0);
+    border: 1px solid var(--color-1);
+    border-radius: 5px;
+    color: var(--color-1);
+    margin: 5px 0px;
+    transition: all .3s ease;
+    font-size: 1rem;
+    
+}
+.buttonHisClass:hover {
+    background-color: var(--color-1);
+    color: var(--color-0);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .navBar {
+        padding: 5px;
+    }
+    .navSide {
+        position: absolute;
+        right: 0;
+        height: 100%;
+        transition: all 0.5s ease;
+    }
+    .navSideToggle {
+        width: 50%;
+    }
+    .navLinks {
+        display: none;
+    }
+
+
+}
