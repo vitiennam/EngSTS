@@ -37,8 +37,6 @@ npm run server
 Webpack
   
 # Libraries:
-* @types/jquery@3.5.16
-* @types/jqueryui@1.12.16
 * axios@1.2.2
 * css-loader@6.7.3
 * express@4.18.2
