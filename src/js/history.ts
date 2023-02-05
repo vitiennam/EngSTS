@@ -4,8 +4,15 @@ import * as commonFunc from "./common"
 
 var userHistory: any[]
 if(localStorage.userHistoryWord) {
-  userHistory = JSON.parse(localStorage.userHistoryWord) 
-} else {
+  try {
+    userHistory = JSON.parse(localStorage.userHistoryWord) 
+
+  } catch (error) {
+    console.log(error)
+    localStorage.userHistoryWord = ''
+    userHistory = []
+  }} else {
+    console.log("no his")
   userHistory = []
 }
 function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
