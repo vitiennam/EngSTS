@@ -150,11 +150,15 @@ li#hamburger {
 .nextword:hover {
     color: var(--color-2);
 }
-.iframeContent {
+.divIframeSeach {
     width: 100%;
     height: 90%;
     border-radius: 15px;
     background-color: var(--color-0);
+}
+.iframeContent {
+    width: 100%;
+    height: 100%;
 }
 
 .clickCardNotify{
