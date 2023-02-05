@@ -196,7 +196,7 @@ app.post(/^\/randomWord/, (req,res)=>{
       res.end()
       return
     }
-    console.log(result)
+    // console.log(result)
     if(result.length == 10){
       res.end(JSON.stringify(result))
     }
