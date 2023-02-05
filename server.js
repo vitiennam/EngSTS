@@ -11,7 +11,7 @@ const mysql = require('mysql2')
 const randomToken = require('random-token')
 const https = require("https")
 
-const autoQueryCheck = /[^\/a-zA-Z=]/g
+const autoQueryCheck = /[^\/a-zA-Z=?]/g
 // const configMySql = require('./configMySql.js')
 // const port = require('./configPort')
 require('dotenv').config()
@@ -196,17 +196,22 @@ app.post(/^\/randomWord/, (req,res)=>{
       res.end()
       return
     }
-    // console.log(result)
+    console.log(result)
     if(result.length == 10){
       res.end(JSON.stringify(result))
     }
   })
 
 })
-app.get(/^\/autoQuerry=/, (req, res) => {
-
-
+app.get(/^\/search/, (req, res) => {
+  let responseObj = {
+    status: '',
+    body: {},
+  }
+  // console.log(req)
   console.log(req.url)
+  // console.log(req.url.search.toString())
+  // console.log(req.search, " ", req.query)
   if(autoQueryCheck.test(req.url))
   {
     
@@ -214,7 +219,7 @@ app.get(/^\/autoQuerry=/, (req, res) => {
     console.log("error1")
     return
   }
-  let queryText = req.url.split("=")[1]
+  let queryText = req.query.q
   if(/[^\/a-zA-Z=]/g.test(queryText)){
     
     res.end("400")
@@ -222,7 +227,7 @@ app.get(/^\/autoQuerry=/, (req, res) => {
     return
   }
   
-  let sqlQuery = "SELECT * FROM englishword WHERE word LIKE '"+queryText+"%' LIMIT 15;"
+  let sqlQuery = "SELECT * FROM englishword WHERE word LIKE '"+queryText+"%' LIMIT 30;"
   console.log(sqlQuery)
   con.query(sqlQuery, function(err,result, fields){
     if(err) {

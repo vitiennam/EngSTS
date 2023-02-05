@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 require('dotenv').config()
   // mode: "production",
   // mode: "development",
-const devMode = process.env.NODE_ENV === "production";
+const productMode = process.env.NODE_ENV === "production";
 let pluginsSetting = [
   // new webpack.HotModuleReplacementPlugin(),
   //Setting Html file
@@ -74,7 +74,7 @@ let exportSetting = {
       {
         test: /\.(sa|sc|c)ss$/i,
         use: [
-          devMode ? MiniCssExtractPlugin.loader  : "style-loader",
+          productMode ? MiniCssExtractPlugin.loader  : "style-loader",
           "css-loader",
           // "postcss-loader",
           // "sass-loader",
@@ -103,7 +103,7 @@ let exportSetting = {
     runtimeChunk: "single"
   }
 }
-if(devMode){
+if(productMode){
   exportSetting.plugins.push(new MiniCssExtractPlugin())
 
  

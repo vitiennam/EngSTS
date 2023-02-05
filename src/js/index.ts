@@ -7,12 +7,21 @@ var engDataSearch: ArrayLike<String>
 var userHistory: any[]
 let numChoseLi = -1
 let keyAccept = ['ArrowUp', 'ArrowDown', 'Down', 'Up', 'Enter']
+let baseURl = window.location.origin
 
 
 // var notClick = ['dropMenuContent', 'dropMenu', 'dropBtn', 'dropClick', 't1', 't2', 't3'];
 
 if(localStorage.userHistoryWord) {
-  userHistory = JSON.parse(localStorage.userHistoryWord) 
+  try {
+    userHistory = JSON.parse(localStorage.userHistoryWord) 
+
+  } catch (error) {
+    localStorage.userHistoryWord = ''
+    userHistory = []
+  }
+  // userHistory = localStorage.userHistoryWord
+  console.log(typeof(userHistory))
 } else {
   userHistory = []
 }
@@ -92,7 +101,7 @@ function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
   userHistory.push(targetTag.innerHTML)
   fetch(urlO).then((response) => response.json()).then((data) => {
     console.log("get data from O")
-    console.log(data)
+    // console.log(data)
     document.getElementById('SearchContentO').setAttribute('srcdoc', data)
     document.getElementById('tabSeach').style.display = 'block'
     document.getElementById('divIframeSeachO').style.display = 'block'
@@ -112,7 +121,10 @@ function inputChange (ev: Event) {
     
     
     inputTag.style.borderRadius = '25px 25px 0 0'
-    const urlAutoQuery = 'autoQuerry='+inputValue
+    // const urlAutoQuery = 'autoQuery='+inputValue
+    const urlAutoQuery = '/search?q='+inputValue
+    // const urlAutoQuery = new URL('autoQuery='+inputValue, baseURl) 
+    console.log(urlAutoQuery)
     fetch(urlAutoQuery).then((response) => response.json()).then((data)=> {
       console.log(data)
       if(data.length == 0){
@@ -272,9 +284,10 @@ document.onreadystatechange = () => {
   //   }
   // }
 
-
+  
   window.onbeforeunload = function () {
-      localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+      // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+      localStorage.userHistoryWord = JSON.stringify(userHistory)
     }
 }
 
