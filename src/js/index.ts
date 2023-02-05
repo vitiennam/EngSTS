@@ -286,9 +286,10 @@ document.onreadystatechange = () => {
   //     }
   //   }
   // }
-  let isOnIOS = navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i)
+  let isOnIOS = navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/Safari/i)
   let eventName = isOnIOS ? "pagehide" : "beforeunload"
   console.log(navigator.userAgent)
+  console.log(isOnIOS)
   window.addEventListener(eventName, function (event) { 
     localStorage.userHistoryWord = JSON.stringify(userHistory)
 
