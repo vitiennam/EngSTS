@@ -99,6 +99,8 @@ function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
   // userHistory.push(ui.item.value)
   const urlO = 'queryWordO='+targetTag.innerHTML
   userHistory.push(targetTag.innerHTML)
+  localStorage.userHistoryWord = JSON.stringify(userHistory)
+
   fetch(urlO).then((response) => response.json()).then((data) => {
     console.log("get data from O")
     // console.log(data)
