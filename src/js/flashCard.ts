@@ -119,7 +119,10 @@ document.onreadystatechange = () => {
   for(let i = 0; i < btnList.length; i++){
     btnList[i].onclick = flashCardToggle
   }
-  window.onbeforeunload = () => {
-    localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
-  }
+  let isOnIOS = navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i)
+  let eventName = isOnIOS ? "pagehide" : "beforeunload"
+  window.addEventListener(eventName, function (event) { 
+    localStorage.userHistoryWord = JSON.stringify(userHistory)
+
+  } )
 }
