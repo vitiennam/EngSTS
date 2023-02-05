@@ -144,6 +144,7 @@ document.onreadystatechange = () => {
   // for(let i = 0; i < btnList.length; i++){
   //   btnList[i].onclick = flashCardToggle
   // }
+  console.log(navigator.userAgent)
   let isOnIOS = navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i)
   let eventName = isOnIOS ? "pagehide" : "beforeunload"
   window.addEventListener(eventName, function (event) { 

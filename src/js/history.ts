@@ -15,6 +15,7 @@ if(localStorage.userHistoryWord) {
     console.log("no his")
   userHistory = []
 }
+
 function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
   const targetTag = evt.target as Element
   console.log('click: ', targetTag.innerHTML)
