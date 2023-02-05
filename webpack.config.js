@@ -13,31 +13,36 @@ let pluginsSetting = [
     title: 'English Search Web',
     template: './src/index.html',
     //add index.js to Head of index.html file
-    chunks: ['index'] 
+    chunks: ['index'],
+    scriptLoading: 'defer'
   }),
   new HtmlWebpackPlugin({
     title: 'History',
     filename: 'history.html',
     template: './src/history.html',
-    chunks: ['history']
+    chunks: ['history'],
+    scriptLoading: 'defer'
   }),
   new HtmlWebpackPlugin({
     title: 'flash_card',
     filename: 'flash_card.html',
     template: './src/flash_card.html',
-    chunks: ['flashCard']
+    chunks: ['flashCard'],
+    scriptLoading: 'defer'
   }),
   new HtmlWebpackPlugin({
     title: 'login',
     filename: 'login.html',
     template: './src/login.html',
-    chunks: ['login']
+    chunks: ['login'],
+    scriptLoading: 'defer'
   }),
   new HtmlWebpackPlugin({
     title: 'register',
     filename: 'register.html',
     template: './src/register.html',
-    chunks: ['register']
+    chunks: ['register'],
+    scriptLoading: 'defer'
   }),
   
 ]

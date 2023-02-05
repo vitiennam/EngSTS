@@ -139,10 +139,11 @@ li#hamburger {
     height: 100%;
 }
 .nextword {
-    width: 100%;
+    width: 30%;
     height: 10%;
-    background-color: transparent;
-    border: none;
+    background-color: var(--color-0);
+    border: 2px solid var(--color-1);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -152,7 +153,8 @@ li#hamburger {
     transition: all 0.2 ease;
 }
 .nextword:hover {
-    color: var(--color-2);
+    color: var(--color-0);
+    background-color: var(--color-1);
 }
 .divIframeSeach {
     width: 100%;
