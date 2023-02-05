@@ -14,35 +14,40 @@ let pluginsSetting = [
     template: './src/index.html',
     //add index.js to Head of index.html file
     chunks: ['index'],
-    scriptLoading: 'defer'
+    scriptLoading: 'defer',
+    favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
   new HtmlWebpackPlugin({
     title: 'History',
     filename: 'history.html',
     template: './src/history.html',
     chunks: ['history'],
-    scriptLoading: 'defer'
+    scriptLoading: 'defer',
+    favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
   new HtmlWebpackPlugin({
     title: 'flash_card',
     filename: 'flash_card.html',
     template: './src/flash_card.html',
     chunks: ['flashCard'],
-    scriptLoading: 'defer'
+    scriptLoading: 'defer',
+    favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
   new HtmlWebpackPlugin({
     title: 'login',
     filename: 'login.html',
     template: './src/login.html',
     chunks: ['login'],
-    scriptLoading: 'defer'
+    scriptLoading: 'defer',
+    favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
   new HtmlWebpackPlugin({
     title: 'register',
     filename: 'register.html',
     template: './src/register.html',
     chunks: ['register'],
-    scriptLoading: 'defer'
+    scriptLoading: 'defer',
+    favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
   
 ]
