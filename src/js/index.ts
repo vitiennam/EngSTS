@@ -85,6 +85,7 @@ function openSearchContent(evt: any) {
 function navSideBtn(evt: any) {
   document.getElementById("navSide").classList.toggle('navSideToggle')
 }
+
 function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
   const targetTag = evt.target as Element
   console.log('click: ', targetTag.innerHTML)
@@ -99,7 +100,7 @@ function choseWord (this: GlobalEventHandlers ,evt: MouseEvent) {
   // userHistory.push(ui.item.value)
   const urlO = 'queryWordO='+targetTag.innerHTML
   userHistory.push(targetTag.innerHTML)
-  localStorage.userHistoryWord = JSON.stringify(userHistory)
+  // localStorage.userHistoryWord = JSON.stringify(userHistory)
 
   fetch(urlO).then((response) => response.json()).then((data) => {
     console.log("get data from O")
@@ -285,12 +286,16 @@ document.onreadystatechange = () => {
   //     }
   //   }
   // }
+  var isOnIOS = navigator.userAgent.match(/iPad/i)|| navigator.userAgent.match(/iPhone/i)
+  var eventName = isOnIOS ? "pagehide" : "beforeunload"
+  window.addEventListener(eventName, function (event) { 
+    localStorage.userHistoryWord = JSON.stringify(userHistory)
 
+  } )
   
-  window.onbeforeunload = function () {
-      // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
-      localStorage.userHistoryWord = JSON.stringify(userHistory)
-    }
+  // window.onbeforeunload = function () {
+  //     // localStorage.setItem('userHistoryWord', JSON.stringify(userHistory) )
+  //   }
 }
 
 
