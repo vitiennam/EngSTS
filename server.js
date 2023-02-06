@@ -10,6 +10,7 @@ const compiler = webpack(config)
 const mysql = require('mysql2')
 const randomToken = require('random-token')
 const https = require("https")
+// var jwt = require('jsonwebtoken');
 
 const autoQueryCheck = /[^\/a-zA-Z=?]/g
 // const configMySql = require('./configMySql.js')
@@ -142,8 +143,15 @@ app.post(/^\/signup/, function(req, res){
 	let password = req.body.userpassword;
   let username = req.body.username;
   const userToken = randomToken(16)
-  
-  let sql = 'INSERT INTO user (username, password, email, token) VALUES (?,?,?,?);'
+  const secretToken = randomToken(16)
+  // const tokenObj = {
+  //   token: userToken,
+  //   username: username,
+  //   type: 'user'
+  // }
+  // const jwtToken = jwt.sign(tokenObj,secretToken)
+
+  let sql = 'INSERT INTO user (username, password, email, token, secrettoken) VALUES (?,?,?,?,?);'
   console.log('sql: ', sql)
   if (email && password && username) {
     con.query('SELECT * FROM user WHERE email = ?', [email], function(err, results, fields){		
@@ -152,7 +160,7 @@ app.post(/^\/signup/, function(req, res){
         return
       }
       if (results.length === 0) {
-        con.query(sql, [username, password, email, userToken], function(err, results, fields){
+        con.query(sql, [username, password, email, userToken, secretToken], function(err, results, fields){
             
           if (err) {return}
           console.log("1 record inserted")

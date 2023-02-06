@@ -14,8 +14,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `token` varchar(16) NOT NULL,
+  `secrettoken` varchar(16) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `token` varchar(16) NOT NULL,
+  `secrettoken` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 -- Create table engWord
@@ -55,6 +66,8 @@ Show tables;
 INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.com');
 -- Add column
 ALTER TABLE user ADD COLUMN token VARCHAR(16) AFTER email;
+ALTER TABLE user ADD COLUMN secrettoken VARCHAR(16) NOT NULL AFTER token;
+
 
 UPDATE user SET token = ? WHERE username = ?;
 -- ----------------------------------------------------
