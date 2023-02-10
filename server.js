@@ -212,7 +212,7 @@ app.post(/^\/randomWord/, (req,res)=>{
   })
 
 })
-app.get("loaderio-dc8cc38437756e8aefbefec02afd6845.txt", (req, res)=>{
+app.get("/loaderio-dc8cc38437756e8aefbefec02afd6845.txt", (req, res)=>{
   res.end("loaderio-dc8cc38437756e8aefbefec02afd6845")
 })
 app.get(/^\/search/, (req, res) => {
