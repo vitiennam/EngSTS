@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // var webpack = require('webpack');
+// var hotMiddlewareScript =
+//   'webpack-hot-middleware/client?path=http://localhost:8080';
 require('dotenv').config()
   // mode: "production",
   // mode: "development",
@@ -49,11 +51,24 @@ let pluginsSetting = [
     scriptLoading: 'defer',
     favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
+  new HtmlWebpackPlugin({
+    title: 'register',
+    filename: 'main.html',
+    template: './src/main.html',
+    chunks: ['main'],
+    scriptLoading: 'defer',
+    favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
+  }),
+  new HtmlWebpackPlugin({
+    title: 'loaderio-dc8cc38437756e8aefbefec02afd6845',
+    filename: 'loaderio-dc8cc38437756e8aefbefec02afd6845.html',
+  }),
   
 ]
 
 let exportSetting = {
   mode: process.env.NODE_ENV,
+  target: 'web',
 
   entry: {
     index: "./src/js/index.ts",
@@ -61,12 +76,14 @@ let exportSetting = {
     flashCard: "./src/js/flashCard.ts",
     login:"./src/js/login.ts",
     register:"./src/js/register.ts",
-    // main: ['webpack-hot-middleware/client', './src/main.js'],
+    main:"./src/js/main.ts",
+    // main: [ './src/main.js', hotMiddlewareScript],
 
-    // index: ['webpack-hot-middleware/client',  "./src/js/index.ts"],
-    // history: ['webpack-hot-middleware/client',  "./src/js/history.ts"] ,
-    // flashCard: ['webpack-hot-middleware/client', "./src/js/flashCard.ts"],
-    // login: ['webpack-hot-middleware/client', "./src/js/login.ts"],
+    // index: ["./src/js/index.ts", hotMiddlewareScript],
+    // history: ["./src/js/history.ts", hotMiddlewareScript] ,
+    // flashCard: ["./src/js/flashCard.ts", hotMiddlewareScript],
+    // login: ["./src/js/login.ts", hotMiddlewareScript],
+
 
   },
   devServer: {
@@ -102,8 +119,8 @@ let exportSetting = {
   },
   output: {
     //contenthash create hash string to add into filename
-    filename: '[name].[contenthash].bundle.js',
-    // filename: '[name].js',
+    // filename: '[name].[contenthash].bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
     //Clean dist folder before build code
     clean : true,
@@ -112,6 +129,7 @@ let exportSetting = {
   optimization: {
     runtimeChunk: "single"
   }
+
 }
 if(productMode){
   exportSetting.plugins.push(new MiniCssExtractPlugin())
@@ -119,6 +137,8 @@ if(productMode){
  
 } else {
   exportSetting.devtool = 'inline-source-map'
+  // exportSetting.plugins.push(new webpack.HotModuleReplacementPlugin())
+
 }
 // console.log(exportSetting.plugins)
 

@@ -52,12 +52,13 @@ const con = mysql.createPool({
 //Use Middleware of Webpack
 
 app.use(
-    webPackDevMiddleware(compiler,
-        {
-            publicPath: config.output.publicPath,
-        })
-    
+  webPackDevMiddleware(compiler,
+      {
+          publicPath: config.output.publicPath,
+      })
+  
 )
+
 // app.use(require("webpack-hot-middleware")(compiler, {
 //   log: false,
 //   path: "/__what",
