@@ -59,10 +59,6 @@ let pluginsSetting = [
     scriptLoading: 'defer',
     favicon: 'svg/045cf9ff2cf53a74e4ab328c248ddd9c.ico/favicon.ico'
   }),
-  new HtmlWebpackPlugin({
-    title: 'loaderio-dc8cc38437756e8aefbefec02afd6845',
-    filename: 'loaderio-dc8cc38437756e8aefbefec02afd6845.html',
-  }),
   
 ]
 
